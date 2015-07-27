@@ -1,4 +1,5 @@
 ﻿using System;
+using PlanesGame.Controllers;
 
 namespace PlanesGame.Views
 {
@@ -8,7 +9,7 @@ namespace PlanesGame.Views
 
         string ChatBoxInputText { get; set; }
 
-        void SetController();
+        void SetController(UserController controller);
         void SetPlayerPlanesAlive(string data);
         void SetPlayerPlanesDestroyed(string data);
         void SetPlayerHits(string data);

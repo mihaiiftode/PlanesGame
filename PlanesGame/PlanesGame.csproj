@@ -49,11 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\KillRuleController.cs" />
+    <Compile Include="Controllers\PlayerConnectionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="GameBoard.cs">
+    <Compile Include="Models\PlayerConnectionInfo.cs" />
+    <Compile Include="Views\GameBoard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameBoard.Designer.cs">
+    <Compile Include="Views\GameBoard.Designer.cs">
       <DependentUpon>GameBoard.cs</DependentUpon>
     </Compile>
     <Compile Include="GameCore\IGameArbitrer.cs" />
@@ -73,7 +76,19 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IUserView.cs" />
-    <EmbeddedResource Include="GameBoard.resx">
+    <Compile Include="Views\KillRules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\KillRules.Designer.cs">
+      <DependentUpon>KillRules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PlayerConnection.Designer.cs">
+      <DependentUpon>PlayerConnection.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\GameBoard.resx">
       <DependentUpon>GameBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -85,6 +100,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\KillRules.resx">
+      <DependentUpon>KillRules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PlayerConnection.resx">
+      <DependentUpon>PlayerConnection.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -98,9 +119,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

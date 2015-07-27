@@ -68,5 +68,10 @@ namespace PlanesGame.Controllers
         {
             throw new System.NotImplementedException();
         }
+
+        public void SetPlaneOrientation(string text)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

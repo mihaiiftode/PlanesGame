@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PlanesGame.Controllers;
 using PlanesGame.GameGraphics;
 using PlanesGame.Network;
 using PlanesGame.Network.NetworkCore;
@@ -18,85 +19,25 @@ namespace PlanesGame
 {
     public partial class GameBoard : Form , IUserView
     {
+        private UserController _controller;
         public GameBoard()
         {
             InitializeComponent();
+            InitiateRadioButtons();
         }
 
-        private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void InitiateRadioButtons()
         {
-
+            foreach (var radioButton in PlaneOrietationBar.Controls.Cast<RadioButton>())
+            {
+                radioButton.Click += (sender, args) =>
+                {
+                    ResetAllRadioButtons(sender);
+                    _controller.SetPlaneOrientation(((RadioButton)sender).Text);
+                };
+            }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void hostAGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void connectToGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void networkModeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void aIModeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void setKillRulesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void setPlayerNameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PlayerPanel_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void OponentPanel_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void OrientationUp_MouseClick(object sender, MouseEventArgs e)
-        {
-            ResetAllRadioButtons(sender);
-        }
-
-        private void OrientationDown_MouseClick(object sender, MouseEventArgs e)
-        {
-            ResetAllRadioButtons(sender);
-        }
-
-        private void OrientationLeft_MouseClick(object sender, MouseEventArgs e)
-        {
-            ResetAllRadioButtons(sender);
-        }
-
-        private void OrientationRight_MouseClick(object sender, MouseEventArgs e)
-        {
-            ResetAllRadioButtons(sender);
-        }
         private void ResetAllRadioButtons(object sender)
         {
             ((RadioButton)sender).Checked = true;
@@ -106,11 +47,67 @@ namespace PlanesGame
             }
         }
 
+        private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.StartNewGame();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void hostAGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           _controller.StartServer();
+        }
+
+        private void connectToGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.ConnectToGame();
+        }
+
+        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.Disconnect();
+        }
+
+        private void networkModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.SetOponent("network");
+        }
+
+        private void aIModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            _controller.SetOponent("computer");
+        }
+
+        private void setKillRulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.SetKillRules();
+        }
+
+        private void setPlayerNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.SetPlayerName();
+        }
+
+        private void PlayerPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            _controller.SetUp(e.Location);
+        }
+
+        private void OponentPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            _controller.ExecuteAttack(e.Location);
+        }
+
         public string ChatBoxText { get; set; }
         public string ChatBoxInputText { get; set; }
-        public void SetController()
+        public void SetController(UserController controller)
         {
-            throw new NotImplementedException();
+            _controller = controller;
         }
 
         public void SetPlayerPlanesAlive(string data)
