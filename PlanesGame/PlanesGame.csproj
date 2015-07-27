@@ -49,15 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
     <Compile Include="Controllers\KillRuleController.cs" />
     <Compile Include="Controllers\PlayerConnectionController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\GameBoardController.cs" />
     <Compile Include="Models\PlayerConnectionInfo.cs" />
-    <Compile Include="Views\GameBoard.cs">
+    <Compile Include="Views\GameBoardView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\GameBoard.Designer.cs">
-      <DependentUpon>GameBoard.cs</DependentUpon>
+    <Compile Include="Views\GameBoardView.Designer.cs">
+      <DependentUpon>GameBoardView.cs</DependentUpon>
     </Compile>
     <Compile Include="GameCore\IGameArbitrer.cs" />
     <Compile Include="GameCore\IPlane.cs" />
@@ -75,21 +76,23 @@
     <Compile Include="Player\IPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\IUserView.cs" />
-    <Compile Include="Views\KillRules.cs">
+    <Compile Include="Views\IGameBoardView.cs" />
+    <Compile Include="Views\IKillRulesView.cs" />
+    <Compile Include="Views\IPlayerConnectionView.cs" />
+    <Compile Include="Views\KillRulesView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\KillRules.Designer.cs">
-      <DependentUpon>KillRules.cs</DependentUpon>
+    <Compile Include="Views\KillRulesView.Designer.cs">
+      <DependentUpon>KillRulesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PlayerConnection.cs">
+    <Compile Include="Views\PlayerConnectionView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PlayerConnection.Designer.cs">
-      <DependentUpon>PlayerConnection.cs</DependentUpon>
+    <Compile Include="Views\PlayerConnectionView.Designer.cs">
+      <DependentUpon>PlayerConnectionView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\GameBoard.resx">
-      <DependentUpon>GameBoard.cs</DependentUpon>
+    <EmbeddedResource Include="Views\GameBoardView.resx">
+      <DependentUpon>GameBoardView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,11 +103,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\KillRules.resx">
-      <DependentUpon>KillRules.cs</DependentUpon>
+    <EmbeddedResource Include="Views\KillRulesView.resx">
+      <DependentUpon>KillRulesView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PlayerConnection.resx">
-      <DependentUpon>PlayerConnection.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PlayerConnectionView.resx">
+      <DependentUpon>PlayerConnectionView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

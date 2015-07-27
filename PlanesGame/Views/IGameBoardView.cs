@@ -3,13 +3,13 @@ using PlanesGame.Controllers;
 
 namespace PlanesGame.Views
 {
-    public interface IUserView
+    public interface IGameBoardView
     {
         string ChatBoxText { get; set; }
 
         string ChatBoxInputText { get; set; }
 
-        void SetController(UserController controller);
+        void SetController(GameBoardController controller);
         void SetPlayerPlanesAlive(string data);
         void SetPlayerPlanesDestroyed(string data);
         void SetPlayerHits(string data);

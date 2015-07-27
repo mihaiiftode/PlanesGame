@@ -1,22 +1,26 @@
 using System.Drawing;
+using System.Drawing.Imaging;
 using PlanesGame.Views;
 
 namespace PlanesGame.Controllers
 {
-    public class UserController
+    public class GameBoardController
     {
-        private IUserView _view;
+        private IGameBoardView _view;
 
-        public UserController(IUserView view)
+        public GameBoardController(IGameBoardView view)
         {
             _view = view;
+            Common.GameBoardController = this;
         }
-
 
         public void StartNewGame()
         {
+
+
+            /*
             SetPlayerName();
-            SetKillRules();
+            SetKillRules();*/
         }
 
         public void StartServer()
@@ -70,6 +74,11 @@ namespace PlanesGame.Controllers
         }
 
         public void SetPlaneOrientation(string text)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ReadyConnection()
         {
             throw new System.NotImplementedException();
         }

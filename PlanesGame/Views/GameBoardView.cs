@@ -17,9 +17,9 @@ using PlanesGame.Views;
 
 namespace PlanesGame
 {
-    public partial class GameBoard : Form , IUserView
+    public partial class GameBoard : Form , IGameBoardView
     {
-        private UserController _controller;
+        private GameBoardController _controller;
         public GameBoard()
         {
             InitializeComponent();
@@ -49,7 +49,12 @@ namespace PlanesGame
 
         private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _controller.StartNewGame();
+            var connectionView = new PlayerConnectionView();
+            var connectionController = new PlayerConnectionController(connectionView, false);
+            connectionView.SetController(connectionController);
+            connectionView.Show();
+
+           // _controller.StartNewGame();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -105,7 +110,7 @@ namespace PlanesGame
 
         public string ChatBoxText { get; set; }
         public string ChatBoxInputText { get; set; }
-        public void SetController(UserController controller)
+        public void SetController(GameBoardController controller)
         {
             _controller = controller;
         }

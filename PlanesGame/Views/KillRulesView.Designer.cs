@@ -1,6 +1,6 @@
 ﻿namespace PlanesGame.Views
 {
-    partial class KillRules
+    partial class KillRulesView
     {
         /// <summary>
         /// Required designer variable.

@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace PlanesGame.Views
 {
-    public partial class PlayerConnection : Form
+    public partial class KillRulesView : Form
     {
-        
-        public PlayerConnection()
+        public KillRulesView()
         {
             InitializeComponent();
-        }
-
-        private void PlayerConnection_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
     }
 }

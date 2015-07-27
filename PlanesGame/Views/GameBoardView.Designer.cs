@@ -304,7 +304,6 @@
             this.OrientationLeft.Name = "OrientationLeft";
             this.OrientationLeft.TabStop = true;
             this.OrientationLeft.UseVisualStyleBackColor = true;
-            this.OrientationLeft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OrientationLeft_MouseClick);
             // 
             // OrientationRight
             // 
@@ -312,7 +311,6 @@
             this.OrientationRight.Name = "OrientationRight";
             this.OrientationRight.TabStop = true;
             this.OrientationRight.UseVisualStyleBackColor = true;
-            this.OrientationRight.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OrientationRight_MouseClick);
             // 
             // OrientationDown
             // 
@@ -320,7 +318,6 @@
             this.OrientationDown.Name = "OrientationDown";
             this.OrientationDown.TabStop = true;
             this.OrientationDown.UseVisualStyleBackColor = true;
-            this.OrientationDown.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OrientationDown_MouseClick);
             // 
             // OrientationUp
             // 
@@ -328,7 +325,6 @@
             this.OrientationUp.Name = "OrientationUp";
             this.OrientationUp.TabStop = true;
             this.OrientationUp.UseVisualStyleBackColor = true;
-            this.OrientationUp.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OrientationUp_MouseClick);
             // 
             // GameBoard
             // 
