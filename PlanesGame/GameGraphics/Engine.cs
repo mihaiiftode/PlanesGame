@@ -6,8 +6,12 @@ namespace PlanesGame.GameGraphics
     public class Engine : IEngine
     {
         public BufferedGraphicsContext GraphicsContext { get; set; }
+
         public BufferedGraphics GraphicsBuffer { get; set; }
+
         public Tile[,] Tiles { get; set; }
+        public int TilesNumberOfRows { get; set; }
+        public int TilesNumberOfCollumns { get; set; }
 
         private Rectangle _clientRectangle ;
 
@@ -16,7 +20,9 @@ namespace PlanesGame.GameGraphics
             _clientRectangle = clientRectangle;
             GraphicsContext = BufferedGraphicsManager.Current;
             GraphicsBuffer = GraphicsContext.Allocate(targetGraphics, clientRectangle);
-            Tiles = new Tile[10,10];
+
+            TilesNumberOfRows = TilesNumberOfCollumns = 10;
+            Tiles = new Tile[TilesNumberOfRows, TilesNumberOfCollumns];
             IntializeTiles();
         }
 
@@ -31,9 +37,9 @@ namespace PlanesGame.GameGraphics
 
             GraphicsBuffer.Graphics.FillRectangle(Brushes.WhiteSmoke, _clientRectangle);
 
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < TilesNumberOfRows; i++)
             {
-                for (var j = 0; j < 10; j++)
+                for (var j = 0; j < TilesNumberOfCollumns; j++)
                 {
                     Tiles[i, j].Rectangle = new Rectangle(new Point(j*offsetBetweenTiles.X, i*offsetBetweenTiles.Y),
                         tileSize);
@@ -43,9 +49,11 @@ namespace PlanesGame.GameGraphics
             GraphicsBuffer.Render();
         }
 
-        public void UpdateTile(Point location)
+        public void SetTileMatrixSize(int rows, int collumns)
         {
-            throw new System.NotImplementedException();
+            Tiles = new Tile[rows,collumns];
+            TilesNumberOfRows = rows;
+            TilesNumberOfCollumns = collumns;
         }
 
         public void UpdateTile(int x, int y, Color myColor)
@@ -55,9 +63,9 @@ namespace PlanesGame.GameGraphics
         }
         private void IntializeTiles()
         {
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < TilesNumberOfRows; i++)
             {
-                for (var j = 0; j < 10; j++)
+                for (var j = 0; j < TilesNumberOfCollumns; j++)
                 {
                     Tiles[i, j] = new Tile()
                     {
