@@ -1,7 +1,7 @@
-﻿namespace PlanesGame.GameCore
+namespace PlanesGame.GameCore
 {
-    public interface IGameArbitrer
+    public interface IGameArbiter
     {
-         
+        void ExecuteAttack(int firstPoint, int secondPoint);
     }
 }
