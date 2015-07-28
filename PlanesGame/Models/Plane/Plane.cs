@@ -12,6 +12,7 @@ namespace PlanesGame.Models.Plane
 
         public Plane()
         {
+            KillPoints = new List<MatrixCoordinate>();
             NumberOfRows = 4;
             NumberOfCollumns = 3;
             PlaneMatrix = new[,]

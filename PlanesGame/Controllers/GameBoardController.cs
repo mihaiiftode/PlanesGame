@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
 using System.Windows.Forms;
 using PlanesGame.GameGraphics;
 using PlanesGame.Models;
+using PlanesGame.Models.Plane;
 using PlanesGame.Models.Player;
+using PlanesGame.Models.PlayerFactory;
 using PlanesGame.Network.Factory;
 using PlanesGame.Network.NetworkCore;
 using PlanesGame.Views;
@@ -21,8 +24,6 @@ namespace PlanesGame.Controllers
         private IPlayer _firstPlayer;
         private IPlayer _secondPlayer;
         private PlayerConnectionInfo _playerConnectionInfo;
-        private List<MatrixCoordinate> _killPoints; 
-
 
         public GameBoardController(IGameBoardView view)
         {
@@ -43,14 +44,15 @@ namespace PlanesGame.Controllers
             var networkFactory = new UserNetworkFactory();
             _network = networkFactory.CreateNetwork("server");
             StartNewGame();
+            _network.StartService();
         }
 
         public void ConnectToGame()
         {
-            StartNewGame();
             var networkFactory = new UserNetworkFactory();
-            _network = networkFactory.CreateNetwork("Client");
+            _network = networkFactory.CreateNetwork("client");
             StartNewGame();
+            _network.StartService();
         }
 
         public void Disconnect()
@@ -60,25 +62,18 @@ namespace PlanesGame.Controllers
 
         public void SetOponent(string type)
         {
-            throw new NotImplementedException();
+            var playerFactory = new ConcretePlayerFactory();
+            _secondPlayer = playerFactory.CreatePlayer(type);
         }
 
         public void SetKillRules()
         {
-            if (_network.GetType() == typeof (Server))
-            {
-                var killRulesView = new KillRulesView();
-                var killRulesController = new KillRuleController(killRulesView);
-                if (killRulesView.ShowDialog() != DialogResult.OK) return;
-                if (killRulesController.KillPoints.Count > 0)
-                {
-                    _killPoints = killRulesController.KillPoints;
-                }
-                else
-                {
+            if (_network.GetType() != typeof (Server)) return;
+            var killRulesView = new KillRulesView();
+            var killRulesController = new KillRuleController(killRulesView);
+            if (killRulesView.ShowDialog() != DialogResult.OK) return;
 
-                }
-            }
+            _firstPlayer.Plane.PlaneMatrix = killRulesController.Plane.PlaneMatrix;
         }
 
         public void SetPlayerName()
@@ -89,6 +84,14 @@ namespace PlanesGame.Controllers
             if (playerConnectionView.ShowDialog() == DialogResult.OK)
             {
                 _playerConnectionInfo = playerConnectionController.PlayerConnectionInfo;
+                if (_playerConnectionInfo.RemoteAddress != null)
+                {
+                    Common.IpEndPoint = new IPEndPoint(_playerConnectionInfo.RemoteAddress, 2000);
+                }
+                else
+                {
+                    Common.IpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"),2000);
+                }
             }
             _firstPlayer.Name = playerConnectionController.PlayerConnectionInfo.Name;
         }
@@ -106,11 +109,13 @@ namespace PlanesGame.Controllers
         public void SetEnginePlayer(Graphics graphicsObject, Rectangle clientRectangle)
         {
             _playerPanelEngine = new Engine(graphicsObject, clientRectangle);
+            _playerPanelEngine.Draw();
         }
 
         public void SetEngineOponent(Graphics graphicsObject, Rectangle clientRectangle)
         {
             _oponentPanelEngine = new Engine(graphicsObject, clientRectangle);
+            _oponentPanelEngine.Draw();
         }
 
         public void SetPlaneOrientation(string text)
@@ -118,12 +123,7 @@ namespace PlanesGame.Controllers
             throw new NotImplementedException();
         }
 
-        public void ReadyConnection(PlayerConnectionInfo playerConnectionInfo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void KillRulesSet(List<MatrixCoordinate> killPoints)
+        internal void ConnectionEstablished()
         {
             throw new NotImplementedException();
         }

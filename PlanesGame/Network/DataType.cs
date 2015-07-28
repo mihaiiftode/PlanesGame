@@ -13,6 +13,6 @@
         Won,
         Lost,
         Message,
-        acknowledge
+        Acknowledge
      }
 }

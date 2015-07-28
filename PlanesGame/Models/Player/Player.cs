@@ -17,6 +17,14 @@ namespace PlanesGame.Models.Player
         public int OwnPlaneMatrix { get; set; }
 
         public int OponentPlaneMatrix { get; set; }
+        public bool CanAttack { get; set; }
+
+        public Plane.Plane Plane { get; set; }
+
+        public  Player()
+        {
+            Plane = new Plane.Plane();
+        }
 
         public void Attack(int row, int collumn)
         {

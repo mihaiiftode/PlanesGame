@@ -14,7 +14,7 @@ namespace PlanesGame.Network.NetworkCore
 
         public override void StartService()
         {
-            _tcpListener = TcpListener.Create(2000);
+            _tcpListener = TcpListener.Create(Common.IpEndPoint.Port);
             Task.Factory.StartNew(ServerService);
         }
 
@@ -27,8 +27,17 @@ namespace PlanesGame.Network.NetworkCore
                 Stream = new NetworkStream(Socket);
                 var buffer = new byte[1024];
                 var commandInterpreter = new CommandInterpreter();
+                var connectValidation = true;
                 while (true) 
                 {
+                    if (connectValidation)
+                    {
+                        var dataType = (int)DataType.Connect; 
+                        var messageBytes = Encoding.UTF8.GetBytes(dataType.ToString());
+                        Stream.Write(messageBytes, 0, messageBytes.Length);
+                        connectValidation = false;
+                    }
+
                     if (!Stream.DataAvailable) continue;
                     var bytesRead = Stream.Read(buffer, 0, buffer.Length);
                     var receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);

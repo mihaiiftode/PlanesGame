@@ -1,15 +1,17 @@
-﻿namespace PlanesGame.Network
+﻿using System;
+
+namespace PlanesGame.Network
 {
     public class CommandInterpreter
     {
         public bool ExecuteCommand(string message)
         {
-            return false;
             var dataType = (DataType)message[0];
             switch (dataType)
             {
                 case DataType.Connect:
-                    break;
+                    Common.GameBoardController.ConnectionEstablished();
+                    return false;
                 case DataType.Disconnect:
                     break;
                 case DataType.StartGame:
@@ -30,8 +32,10 @@
                     break;
                 case DataType.Message:
                     break;
+                case DataType.Acknowledge:
+                    break;
                 default:
-                    return false;
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

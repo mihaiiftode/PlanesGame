@@ -57,6 +57,8 @@
     <Compile Include="GameGraphics\MatrixCoordinate.cs" />
     <Compile Include="Models\Plane\Plane.cs" />
     <Compile Include="Models\PlayerConnectionInfo.cs" />
+    <Compile Include="Models\PlayerFactory\ConcretePlayerFactory.cs" />
+    <Compile Include="Models\PlayerFactory\PlayerFactory.cs" />
     <Compile Include="Models\Player\AiPlayer.cs" />
     <Compile Include="Models\Player\Player.cs" />
     <Compile Include="Network\NetworkCore\Network.cs" />
