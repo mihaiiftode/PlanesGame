@@ -35,30 +35,9 @@ namespace PlanesGame.Views
             }
         }
 
-        private bool[,] plane = new bool[4, 3]
-        {
-            {false, true, false},
-            {true, true, true},
-            {false, true, false},
-            {true, true, true},
-        };
 
         private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var killRulesView = new KillRulesView();
-            var killRulesController = new KillRuleController(killRulesView, plane);
-            if (killRulesView.ShowDialog() == DialogResult.OK)
-            {
-                if (killRulesController.KillPoints.Count > 0)
-                {
-                    MessageBox.Show("A OK");
-                }
-                else
-                {
-                    
-                }
-            }
-
            // _controller.StartNewGame();
         }
 

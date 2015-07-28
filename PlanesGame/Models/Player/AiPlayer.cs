@@ -1,4 +1,6 @@
-﻿namespace PlanesGame.Models.Player
+﻿using System;
+
+namespace PlanesGame.Models.Player
 {
     public class AiPlayer : IPlayer
     {
@@ -12,7 +14,7 @@
         public int OponentPlaneMatrix { get; set; }
         public void Attack(int row, int collumn)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

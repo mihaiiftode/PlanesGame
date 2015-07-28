@@ -1,9 +1,7 @@
-﻿using PlanesGame.Network.Interfaces;
-
-namespace PlanesGame.Network.Factory
+﻿namespace PlanesGame.Network.Factory
 {
     public abstract class NetworkFactory
     {
-        public abstract INetwork CreateNetwork(string connectionType);
+        public abstract NetworkCore.Network CreateNetwork(string connectionType);
     }
 }

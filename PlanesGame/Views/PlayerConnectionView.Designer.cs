@@ -1,11 +1,14 @@
-﻿namespace PlanesGame.Views
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace PlanesGame.Views
 {
     partial class PlayerConnectionView
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -32,8 +35,6 @@
             this.IpTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.IpLabel = new System.Windows.Forms.Label();
-            this.PortLabel = new System.Windows.Forms.Label();
-            this.PortTextBox = new System.Windows.Forms.TextBox();
             this.OkButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -71,23 +72,6 @@
             this.IpLabel.TabIndex = 1;
             this.IpLabel.Text = "IP";
             // 
-            // PortLabel
-            // 
-            this.PortLabel.AutoSize = true;
-            this.PortLabel.Location = new System.Drawing.Point(158, 41);
-            this.PortLabel.Name = "PortLabel";
-            this.PortLabel.Size = new System.Drawing.Size(26, 13);
-            this.PortLabel.TabIndex = 2;
-            this.PortLabel.Text = "Port";
-            // 
-            // PortTextBox
-            // 
-            this.PortTextBox.Location = new System.Drawing.Point(190, 38);
-            this.PortTextBox.Name = "PortTextBox";
-            this.PortTextBox.Size = new System.Drawing.Size(39, 20);
-            this.PortTextBox.TabIndex = 3;
-            this.PortTextBox.Leave += new System.EventHandler(this.PortTextBox_Leave);
-            // 
             // OkButton
             // 
             this.OkButton.Location = new System.Drawing.Point(152, 65);
@@ -104,8 +88,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(239, 94);
             this.Controls.Add(this.OkButton);
-            this.Controls.Add(this.PortTextBox);
-            this.Controls.Add(this.PortLabel);
             this.Controls.Add(this.IpLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IpTextBox);
@@ -120,12 +102,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.TextBox IpTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label IpLabel;
-        private System.Windows.Forms.Label PortLabel;
-        private System.Windows.Forms.TextBox PortTextBox;
-        private System.Windows.Forms.Button OkButton;
+        private TextBox NameTextBox;
+        private TextBox IpTextBox;
+        private Label label1;
+        private Label IpLabel;
+        private Button OkButton;
     }
 }

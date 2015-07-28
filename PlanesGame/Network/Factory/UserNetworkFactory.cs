@@ -1,12 +1,11 @@
 ﻿using System;
-using PlanesGame.Network.Interfaces;
 using PlanesGame.Network.NetworkCore;
 
 namespace PlanesGame.Network.Factory
 {
     public class UserNetworkFactory : NetworkFactory
     {
-        public override INetwork CreateNetwork(string connectionType)
+        public override NetworkCore.Network CreateNetwork(string connectionType)
         {
             switch (connectionType)
             {

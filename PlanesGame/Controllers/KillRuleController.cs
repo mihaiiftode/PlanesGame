@@ -2,27 +2,28 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using PlanesGame.GameGraphics;
+using PlanesGame.Models.Plane;
 using PlanesGame.Views;
 
 namespace PlanesGame.Controllers
 {
     public class KillRuleController
     {
-        public List<MatrixCoordinate> KillPoints { get; set; } 
+        public int NumberKillPoints { get; set; } 
 
         private Engine _engine;
 
-        private readonly bool[,] _planeMatrix;
+        public int[,] PlaneMatrix { get; set; } 
 
         private readonly IKillRulesView _view;
 
-        public KillRuleController(IKillRulesView view, bool[,] planeMatrix)
+        public KillRuleController(IKillRulesView view)
         {
-            _planeMatrix = planeMatrix;
+            PlaneMatrix = new Plane().PlaneMatrix;
             _view = view;
-            KillPoints = new List<MatrixCoordinate>();
             _view.SetController(this);
             _view.GetGraphics();
+            NumberKillPoints = 0;
         }
 
         public void UpdateTile(MouseEventArgs args)
@@ -37,17 +38,19 @@ namespace PlanesGame.Controllers
                     {
                         
                         case MouseButtons.Left:
-                            if (_planeMatrix[i, j])
+                            if (PlaneMatrix[i, j] == 1)
                             {
-                                KillPoints.Add(new MatrixCoordinate(i, j));
+                                NumberKillPoints++;
                                 _engine.UpdateTile(i, j, Color.Red);
+                                PlaneMatrix[i, j] = 2;
                                 return;
                             }
                             break;
                         case MouseButtons.Right:
-                            if (_planeMatrix[i, j])
+                            if (PlaneMatrix[i, j] == 1)
                             {
-                                KillPoints.Remove(KillPoints.Find(killPoint => killPoint.Row == i && killPoint.Collumn == j));
+                                NumberKillPoints--;
+                                PlaneMatrix[i, j] = 2;
                                 _engine.UpdateTile(i, j, Color.Blue);
                                 return;
                             }
@@ -65,7 +68,7 @@ namespace PlanesGame.Controllers
             {
                 for (var j = 0; j < 3; j++)
                 {
-                    if (_planeMatrix[i, j])
+                    if (PlaneMatrix[i, j] == 1)
                     {
                         _engine.UpdateTile(i, j, Color.Blue);
                     }
@@ -75,7 +78,7 @@ namespace PlanesGame.Controllers
 
         public void VerifyKillRules(FormClosingEventArgs formClosingEventArgs)
         {
-            if (KillPoints.Count == 0)
+            if (NumberKillPoints == 0)
             {
                 MessageBox.Show(@"At least one kill point must be selected");
                 formClosingEventArgs.Cancel = true;

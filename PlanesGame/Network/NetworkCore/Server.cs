@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Drawing;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PlanesGame.Network.Interfaces;
 
 namespace PlanesGame.Network.NetworkCore
 {
-    public class Server : INetwork
+    public class Server : Network
     {
-        public Socket Socket { get; set; }
-        public NetworkStream Stream { get; set; }
+        public new Socket Socket { get; set; }
+        public new NetworkStream Stream { get; set; }
+        private TcpListener _tcpListener;
 
-        private readonly TcpListener _tcpListener;
-
-        public Server()
+        public override void StartService()
         {
             _tcpListener = TcpListener.Create(2000);
             Task.Factory.StartNew(ServerService);

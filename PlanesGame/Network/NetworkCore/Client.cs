@@ -3,18 +3,17 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PlanesGame.Network.Interfaces;
 
 namespace PlanesGame.Network.NetworkCore
 {
-    public class Client : INetwork
+    public class Client : Network
     {
-        public Socket Socket { get; set; }
-        public NetworkStream Stream { get; set; }
+        public new Socket Socket { get; set; }
+        public new NetworkStream Stream { get; set; }
 
-        private readonly TcpClient _tcpClient;
+        private TcpClient _tcpClient;
 
-        public Client()
+        public override void StartService()
         {
             _tcpClient = new TcpClient("127.0.0.1", 2000);
             Task.Factory.StartNew(ClientService);

@@ -53,16 +53,13 @@
     <Compile Include="Controllers\KillRuleController.cs" />
     <Compile Include="Controllers\PlayerConnectionController.cs" />
     <Compile Include="Controllers\GameBoardController.cs" />
+    <Compile Include="GameCore\GameArbiter.cs" />
     <Compile Include="GameGraphics\MatrixCoordinate.cs" />
-    <Compile Include="Models\Plane\PlaneDown.cs" />
-    <Compile Include="Models\Plane\PlaneFactory\PlaneFactory.cs" />
-    <Compile Include="Models\Plane\PlaneFactory\PlayerPlaneFactory.cs" />
-    <Compile Include="Models\Plane\PlaneLeft.cs" />
-    <Compile Include="Models\Plane\PlaneRight.cs" />
-    <Compile Include="Models\Plane\PlaneUp.cs" />
+    <Compile Include="Models\Plane\Plane.cs" />
     <Compile Include="Models\PlayerConnectionInfo.cs" />
     <Compile Include="Models\Player\AiPlayer.cs" />
     <Compile Include="Models\Player\Player.cs" />
+    <Compile Include="Network\NetworkCore\Network.cs" />
     <Compile Include="Views\GameBoardView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,7 +75,6 @@
     <Compile Include="Network\CommandInterpreter.cs" />
     <Compile Include="Network\DataType.cs" />
     <Compile Include="Network\Factory\UserNetworkFactory.cs" />
-    <Compile Include="Network\Interfaces\INetwork.cs" />
     <Compile Include="Network\NetworkCore\NetworkCommunication.cs" />
     <Compile Include="Network\Factory\NetworkFactory.cs" />
     <Compile Include="Network\NetworkCore\Server.cs" />

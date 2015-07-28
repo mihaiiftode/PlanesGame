@@ -1,11 +1,14 @@
-﻿namespace PlanesGame.Views
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace PlanesGame.Views
 {
     partial class GameBoardView
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -358,44 +361,44 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox PlayerPanel;
-        private System.Windows.Forms.PictureBox OponentPanel;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startNewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem networkToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hostAGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectToGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem playersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem networkModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aIModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setKillRulesToolStripMenuItem;
-        private System.Windows.Forms.TextBox MessageBoxInput;
-        private System.Windows.Forms.Button MessageSendButton;
-        private System.Windows.Forms.TextBox MessageBoxOutput;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel ConnectionStatusLabel;
-        private System.Windows.Forms.ToolStripStatusLabel OponentNameLabel;
-        private System.Windows.Forms.ToolStripStatusLabel GameStatusLabel;
-        private System.Windows.Forms.GroupBox ScoreBar;
-        private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
-        private System.Windows.Forms.Label OponentsMisses;
-        private System.Windows.Forms.Label OponentsHits;
-        private System.Windows.Forms.Label OponentsPlanesDestroyed;
-        private System.Windows.Forms.Label OponentPlanesAlive;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label MissesLabel;
-        private System.Windows.Forms.Label HitsLabel;
-        private System.Windows.Forms.Label PlanesDestroyedLabel;
-        private System.Windows.Forms.Label PlanesAliveLabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox PlaneOrietationBar;
-        private System.Windows.Forms.RadioButton OrientationLeft;
-        private System.Windows.Forms.RadioButton OrientationRight;
-        private System.Windows.Forms.RadioButton OrientationDown;
-        private System.Windows.Forms.RadioButton OrientationUp;
-        private System.Windows.Forms.ToolStripMenuItem setPlayerNameToolStripMenuItem;
+        private PictureBox PlayerPanel;
+        private PictureBox OponentPanel;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem startNewToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem networkToolStripMenuItem;
+        private ToolStripMenuItem hostAGameToolStripMenuItem;
+        private ToolStripMenuItem connectToGameToolStripMenuItem;
+        private ToolStripMenuItem playersToolStripMenuItem;
+        private ToolStripMenuItem networkModeToolStripMenuItem;
+        private ToolStripMenuItem aIModeToolStripMenuItem;
+        private ToolStripMenuItem setKillRulesToolStripMenuItem;
+        private TextBox MessageBoxInput;
+        private Button MessageSendButton;
+        private TextBox MessageBoxOutput;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel ConnectionStatusLabel;
+        private ToolStripStatusLabel OponentNameLabel;
+        private ToolStripStatusLabel GameStatusLabel;
+        private GroupBox ScoreBar;
+        private ToolStripMenuItem disconnectToolStripMenuItem;
+        private Label OponentsMisses;
+        private Label OponentsHits;
+        private Label OponentsPlanesDestroyed;
+        private Label OponentPlanesAlive;
+        private Label label12;
+        private Label MissesLabel;
+        private Label HitsLabel;
+        private Label PlanesDestroyedLabel;
+        private Label PlanesAliveLabel;
+        private Label label1;
+        private GroupBox PlaneOrietationBar;
+        private RadioButton OrientationLeft;
+        private RadioButton OrientationRight;
+        private RadioButton OrientationDown;
+        private RadioButton OrientationUp;
+        private ToolStripMenuItem setPlayerNameToolStripMenuItem;
     }
 }
 

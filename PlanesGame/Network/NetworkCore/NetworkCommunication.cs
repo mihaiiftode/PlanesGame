@@ -2,17 +2,20 @@
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
-using PlanesGame.Network.Interfaces;
 
 namespace PlanesGame.Network.NetworkCore
 {
-    public class NetworkCommunication : INetwork
+    public class NetworkCommunication : Network
     {
-        public Socket Socket { get; set; }
+        public new Socket Socket { get; set; }
 
-        public NetworkStream Stream { get; set; }
+        public new NetworkStream Stream { get; set; }
+        public override void StartService()
+        {
+            
+        }
 
-        public NetworkCommunication(INetwork targetNetwork)
+        public NetworkCommunication(Network targetNetwork)
         {
             Socket = targetNetwork.Socket;
             Stream = targetNetwork.Stream;

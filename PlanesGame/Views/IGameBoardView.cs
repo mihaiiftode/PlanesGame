@@ -1,5 +1,4 @@
-﻿using System;
-using PlanesGame.Controllers;
+﻿using PlanesGame.Controllers;
 
 namespace PlanesGame.Views
 {

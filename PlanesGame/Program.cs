@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PlanesGame.Controllers;
 using PlanesGame.Views;
 
 namespace PlanesGame
@@ -17,7 +15,11 @@ namespace PlanesGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameBoardView());
+            var gameBoardView = new GameBoardView();
+            var gameBoardController = new GameBoardController(gameBoardView);
+            gameBoardView.SetController(gameBoardController);
+            Application.Run(gameBoardView);
+            
         }
     }
 }

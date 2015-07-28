@@ -5,7 +5,7 @@ namespace PlanesGame.Controllers
 {
     public class PlayerConnectionController
     {
-        private IPlayerConnectionView _view;
+        private readonly IPlayerConnectionView _view;
 
         public PlayerConnectionInfo PlayerConnectionInfo { get; set; }
 
