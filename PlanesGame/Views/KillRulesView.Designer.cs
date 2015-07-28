@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Panel = new System.Windows.Forms.PictureBox();
             this.OkButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Panel)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // Panel
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, -4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.Panel.Location = new System.Drawing.Point(3, -4);
+            this.Panel.Name = "Panel";
+            this.Panel.Size = new System.Drawing.Size(150, 150);
+            this.Panel.TabIndex = 0;
+            this.Panel.TabStop = false;
+            this.Panel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Panel_MouseClick);
             // 
             // OkButton
             // 
@@ -49,26 +50,29 @@
             this.OkButton.TabIndex = 1;
             this.OkButton.Text = "OK";
             this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // KillRules
+            // KillRulesView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(156, 181);
             this.Controls.Add(this.OkButton);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.Panel);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "KillRules";
+            this.Name = "KillRulesView";
             this.Text = "KillRules";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.KillRulesView_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.Panel)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox Panel;
         private System.Windows.Forms.Button OkButton;
     }
 }

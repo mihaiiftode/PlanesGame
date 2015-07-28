@@ -1,26 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PlanesGame.Controllers;
-using PlanesGame.GameGraphics;
-using PlanesGame.Network;
-using PlanesGame.Network.NetworkCore;
 using PlanesGame.Views;
 
 namespace PlanesGame
 {
-    public partial class GameBoard : Form , IGameBoardView
+    public partial class GameBoardView : Form , IGameBoardView
     {
         private GameBoardController _controller;
-        public GameBoard()
+        public GameBoardView()
         {
             InitializeComponent();
             InitiateRadioButtons();
@@ -47,12 +36,29 @@ namespace PlanesGame
             }
         }
 
+        private bool[,] plane = new bool[4, 3]
+        {
+            {false, true, false},
+            {true, true, true},
+            {false, true, false},
+            {true, true, true},
+        };
+
         private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var connectionView = new PlayerConnectionView();
-            var connectionController = new PlayerConnectionController(connectionView, false);
-            connectionView.SetController(connectionController);
-            connectionView.Show();
+            var killRulesView = new KillRulesView();
+            var killRulesController = new KillRuleController(killRulesView, plane);
+            if (killRulesView.ShowDialog() == DialogResult.OK)
+            {
+                if (killRulesController.KillPoints.Count > 0)
+                {
+                    MessageBox.Show("A OK");
+                }
+                else
+                {
+                    
+                }
+            }
 
            // _controller.StartNewGame();
         }

@@ -1,6 +1,6 @@
 ﻿namespace PlanesGame
 {
-    partial class GameBoard
+    partial class GameBoardView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameBoard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameBoardView));
             this.PlayerPanel = new System.Windows.Forms.PictureBox();
             this.OponentPanel = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();

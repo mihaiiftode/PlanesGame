@@ -16,7 +16,7 @@ namespace PlanesGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameBoard());
+            Application.Run(new GameBoardView());
         }
     }
 }

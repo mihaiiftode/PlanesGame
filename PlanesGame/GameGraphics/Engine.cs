@@ -10,7 +10,9 @@ namespace PlanesGame.GameGraphics
         public BufferedGraphics GraphicsBuffer { get; set; }
 
         public Tile[,] Tiles { get; set; }
+
         public int TilesNumberOfRows { get; set; }
+
         public int TilesNumberOfCollumns { get; set; }
 
         private Rectangle _clientRectangle ;
@@ -28,7 +30,7 @@ namespace PlanesGame.GameGraphics
 
         public void Draw()
         {
-            var tileSize = new Size(_clientRectangle.Width/10 - 2, _clientRectangle.Height/10 - 2);
+            var tileSize = new Size(_clientRectangle.Width/TilesNumberOfCollumns - 2, _clientRectangle.Height/TilesNumberOfRows - 2);
             var offsetBetweenTiles = new
             {
                 X = tileSize.Width + 2,
@@ -54,6 +56,7 @@ namespace PlanesGame.GameGraphics
             Tiles = new Tile[rows,collumns];
             TilesNumberOfRows = rows;
             TilesNumberOfCollumns = collumns;
+            IntializeTiles();
         }
 
         public void UpdateTile(int x, int y, Color myColor)
@@ -61,6 +64,36 @@ namespace PlanesGame.GameGraphics
             ((SolidBrush)Tiles[x, y].Brush).Color = myColor;
             Draw();
         }
+
+        public bool TilesContain(Point location)
+        {
+            for (var i = 0; i < TilesNumberOfRows; i++)
+            {
+                for (var j = 0; j < TilesNumberOfCollumns; j++)
+                {
+                    if (Tiles[i, j].Rectangle.Contains(location))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        /*
+        public MatrixCoordinate GetTilePosition(Point location)
+        {
+            for (var i = 0; i < TilesNumberOfRows; i++)
+            {
+                for (var j = 0; j < TilesNumberOfCollumns; j++)
+                {
+                    if (Tiles[i, j].Rectangle.Contains(location))
+                    {
+                        return new MatrixCoordinate(i, j);
+                    }
+                }
+            }
+        }*/
+
         private void IntializeTiles()
         {
             for (var i = 0; i < TilesNumberOfRows; i++)

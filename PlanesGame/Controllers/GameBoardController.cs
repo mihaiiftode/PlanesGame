@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using PlanesGame.GameGraphics;
+using PlanesGame.Models;
 using PlanesGame.Views;
 
 namespace PlanesGame.Controllers
@@ -78,7 +81,12 @@ namespace PlanesGame.Controllers
             throw new System.NotImplementedException();
         }
 
-        public void ReadyConnection()
+        public void ReadyConnection(PlayerConnectionInfo playerConnectionInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void KillRulesSet(List<MatrixCoordinate> killPoints)
         {
             throw new System.NotImplementedException();
         }
