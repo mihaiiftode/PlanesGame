@@ -1,4 +1,4 @@
-﻿namespace PlanesGame
+﻿namespace PlanesGame.Views
 {
     partial class GameBoardView
     {

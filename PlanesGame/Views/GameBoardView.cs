@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Windows.Forms;
 using PlanesGame.Controllers;
-using PlanesGame.Views;
 
-namespace PlanesGame
+namespace PlanesGame.Views
 {
     public partial class GameBoardView : Form , IGameBoardView
     {
