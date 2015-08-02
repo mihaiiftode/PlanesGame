@@ -8,6 +8,8 @@ namespace PlanesGame.Network.NetworkCore
 
         public NetworkStream Stream { get; set; }
 
+        public abstract void SendData(DataType dataType, string data="");
+
         public abstract void StartService();
     }
 }

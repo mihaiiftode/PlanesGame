@@ -63,22 +63,7 @@ namespace PlanesGame.GameGraphics
             ((SolidBrush)Tiles[x, y].Brush).Color = myColor;
             Draw();
         }
-
-        public bool TilesContain(Point location)
-        {
-            for (var i = 0; i < TilesNumberOfRows; i++)
-            {
-                for (var j = 0; j < TilesNumberOfCollumns; j++)
-                {
-                    if (Tiles[i, j].Rectangle.Contains(location))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        /*
+        
         public MatrixCoordinate GetTilePosition(Point location)
         {
             for (var i = 0; i < TilesNumberOfRows; i++)
@@ -91,7 +76,8 @@ namespace PlanesGame.GameGraphics
                     }
                 }
             }
-        }*/
+            return new MatrixCoordinate(-1,-1);
+        }
 
         private void IntializeTiles()
         {

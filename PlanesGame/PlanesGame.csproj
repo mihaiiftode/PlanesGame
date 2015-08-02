@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PlanesGame</RootNamespace>
     <AssemblyName>PlanesGame</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -50,12 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
-    <Compile Include="Controllers\KillRuleController.cs" />
+    <Compile Include="Controllers\KillRulesController.cs" />
     <Compile Include="Controllers\PlayerConnectionController.cs" />
     <Compile Include="Controllers\GameBoardController.cs" />
     <Compile Include="GameCore\GameArbiter.cs" />
+    <Compile Include="GameCore\MatrixOperations.cs" />
     <Compile Include="GameGraphics\MatrixCoordinate.cs" />
     <Compile Include="Models\Plane\Plane.cs" />
+    <Compile Include="Models\Plane\PlaneRotater.cs" />
     <Compile Include="Models\PlayerConnectionInfo.cs" />
     <Compile Include="Models\PlayerFactory\ConcretePlayerFactory.cs" />
     <Compile Include="Models\PlayerFactory\PlayerFactory.cs" />
@@ -109,6 +114,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\KillRulesView.resx">
       <DependentUpon>KillRulesView.cs</DependentUpon>

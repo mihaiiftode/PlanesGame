@@ -11,5 +11,10 @@
             Row = row;
             Collumn = collumn;
         }
+
+        public override string ToString()
+        {
+            return Row + Collumn.ToString();
+        }
     }
 }

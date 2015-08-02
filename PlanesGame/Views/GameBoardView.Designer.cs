@@ -189,12 +189,14 @@ namespace PlanesGame.Views
             // 
             resources.ApplyResources(this.MessageBoxInput, "MessageBoxInput");
             this.MessageBoxInput.Name = "MessageBoxInput";
+            this.MessageBoxInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MessageBoxInput_KeyDown);
             // 
             // MessageSendButton
             // 
             resources.ApplyResources(this.MessageSendButton, "MessageSendButton");
             this.MessageSendButton.Name = "MessageSendButton";
             this.MessageSendButton.UseVisualStyleBackColor = true;
+            this.MessageSendButton.Click += new System.EventHandler(this.MessageSendButton_Click);
             // 
             // MessageBoxOutput
             // 
@@ -329,7 +331,7 @@ namespace PlanesGame.Views
             this.OrientationUp.TabStop = true;
             this.OrientationUp.UseVisualStyleBackColor = true;
             // 
-            // GameBoard
+            // GameBoardView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -342,8 +344,11 @@ namespace PlanesGame.Views
             this.Controls.Add(this.PlayerPanel);
             this.Controls.Add(this.PlaneOrietationBar);
             this.Controls.Add(this.ScoreBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "GameBoard";
+            this.MaximizeBox = false;
+            this.Name = "GameBoardView";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameBoardView_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PlayerPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OponentPanel)).EndInit();
             this.menuStrip1.ResumeLayout(false);

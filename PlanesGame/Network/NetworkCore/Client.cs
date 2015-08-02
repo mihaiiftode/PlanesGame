@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,13 +18,15 @@ namespace PlanesGame.Network.NetworkCore
         public override void StartService()
         {
             _tcpClient = new TcpClient(Common.IpEndPoint.Address.ToString(), Common.IpEndPoint.Port);
-            Task.Factory.StartNew(ClientService);
+            var thread = new Thread(ClientService);
+
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void ClientService()
         {
-            try
-            {
+
                 Stream = _tcpClient.GetStream();
                 var buffer = new byte[1024]; 
                 var commandInterpreter = new CommandInterpreter();
@@ -31,26 +35,35 @@ namespace PlanesGame.Network.NetworkCore
                 {
                     if (connectValidation)
                     {
-                        var dataType = (int)DataType.Connect;;
-                        var messageBytes = Encoding.UTF8.GetBytes(dataType.ToString()); 
-                        Stream.Write(messageBytes, 0, messageBytes.Length);
+                        Common.GameBoardController.ConnectionEstablished();
                         connectValidation = false;
                     }
-                    if (!Stream.DataAvailable) continue;
-                    var bytesRead = Stream.Read(buffer, 0, buffer.Length);
-                    var receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    commandInterpreter.ExecuteCommand(receivedMessage);
-                 
+
+                    var streamReader = new StreamReader(Stream);
+                    var receivedMessage =  streamReader.ReadLine();
+
+                    if (commandInterpreter.ExecuteCommand(receivedMessage))
+                    {
+                        break;
+                    }
                 }
+
+
+        }
+
+        public override void SendData(DataType dataType, string data = "")
+        {
+            try
+            {
+                var streamWriter = new StreamWriter(Stream);
+                streamWriter.WriteLine((int)dataType + " " + data);
+                streamWriter.Flush();
             }
             catch (Exception e)
             {
-                MessageBox.Show("Something went wrong with the client connection:" + e.Message);
+                MessageBox.Show("Something went wrong:" + e.Message);
             }
-            finally
-            {
-                _tcpClient.Close();
-            }
+
         }
     }
 }

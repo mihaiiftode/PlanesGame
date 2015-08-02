@@ -6,34 +6,38 @@ namespace PlanesGame.Network
     {
         public bool ExecuteCommand(string message)
         {
-            var dataType = (DataType)message[0];
+            Common.GameBoardController.AddMessage(message);
+            if (message == null) return false;
+            var dataType = (DataType)int.Parse(message[0].ToString());
+            var data = message.Substring(1);
             switch (dataType)
             {
                 case DataType.Connect:
                     Common.GameBoardController.ConnectionEstablished();
                     return false;
                 case DataType.Disconnect:
-                    break;
+                    return true;
                 case DataType.StartGame:
-                    break;
+                    Common.GameBoardController.StartGame();
+                    return false;
                 case DataType.RestartGame:
-                    break;
+                    return false;
                 case DataType.Attack:
-                    break;
-                case DataType.EndGame:
-                    break;
+                    Common.GameBoardController.Attacked(data);
+                    return false;
+                case DataType.AttackResponse:
+                    Common.GameBoardController.AttackResponse(data);
+                    return false;
                 case DataType.SetUp:
-                    break;
-                case DataType.SetUpData:
-                    break;
+                    Common.GameBoardController.SetUpData(data);
+                    return false;
                 case DataType.Won:
-                    break;
+                    return false;
                 case DataType.Lost:
-                    break;
+                    return false;
                 case DataType.Message:
-                    break;
-                case DataType.Acknowledge:
-                    break;
+                    Common.GameBoardController.AddMessage(data);
+                    return false;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

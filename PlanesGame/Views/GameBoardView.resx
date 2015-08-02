@@ -164,6 +164,36 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>819, 24</value>
+  </data>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="startNewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 22</value>
   </data>
@@ -176,11 +206,11 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+  <data name="networkToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 20</value>
   </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
+  <data name="networkToolStripMenuItem.Text" xml:space="preserve">
+    <value>Network</value>
   </data>
   <data name="hostAGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 22</value>
@@ -200,11 +230,11 @@
   <data name="disconnectToolStripMenuItem.Text" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="networkToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
+  <data name="playersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
   </data>
-  <data name="networkToolStripMenuItem.Text" xml:space="preserve">
-    <value>Network</value>
+  <data name="playersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Players</value>
   </data>
   <data name="networkModeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 22</value>
@@ -232,36 +262,6 @@
   </data>
   <data name="setPlayerNameToolStripMenuItem.Text" xml:space="preserve">
     <value>Set Player Name</value>
-  </data>
-  <data name="playersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
-  </data>
-  <data name="playersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Players</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>819, 24</value>
-  </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="MessageBoxInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 403</value>
@@ -314,6 +314,10 @@
   <data name="MessageBoxOutput.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MessageBoxOutput.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
   <data name="MessageBoxOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>819, 60</value>
   </data>
@@ -335,24 +339,6 @@
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
-  <data name="ConnectionStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 17</value>
-  </data>
-  <data name="ConnectionStatusLabel.Text" xml:space="preserve">
-    <value>Connections Status</value>
-  </data>
-  <data name="OponentNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
-  </data>
-  <data name="OponentNameLabel.Text" xml:space="preserve">
-    <value>Adversary Name</value>
-  </data>
-  <data name="GameStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 17</value>
-  </data>
-  <data name="GameStatusLabel.Text" xml:space="preserve">
-    <value>Game Status(global identifier)</value>
-  </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 436</value>
   </data>
@@ -377,10 +363,171 @@
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ConnectionStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
+  </data>
+  <data name="ConnectionStatusLabel.Text" xml:space="preserve">
+    <value>Connections Status</value>
+  </data>
+  <data name="OponentNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 17</value>
+  </data>
+  <data name="OponentNameLabel.Text" xml:space="preserve">
+    <value>Adversary Name</value>
+  </data>
+  <data name="GameStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 17</value>
+  </data>
+  <data name="GameStatusLabel.Text" xml:space="preserve">
+    <value>Game Status(global identifier)</value>
+  </data>
+  <data name="&gt;&gt;OponentsMisses.Name" xml:space="preserve">
+    <value>OponentsMisses</value>
+  </data>
+  <data name="&gt;&gt;OponentsMisses.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OponentsMisses.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;OponentsMisses.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;OponentsHits.Name" xml:space="preserve">
+    <value>OponentsHits</value>
+  </data>
+  <data name="&gt;&gt;OponentsHits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OponentsHits.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;OponentsHits.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;OponentsPlanesDestroyed.Name" xml:space="preserve">
+    <value>OponentsPlanesDestroyed</value>
+  </data>
+  <data name="&gt;&gt;OponentsPlanesDestroyed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OponentsPlanesDestroyed.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;OponentsPlanesDestroyed.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;OponentPlanesAlive.Name" xml:space="preserve">
+    <value>OponentPlanesAlive</value>
+  </data>
+  <data name="&gt;&gt;OponentPlanesAlive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OponentPlanesAlive.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;OponentPlanesAlive.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;MissesLabel.Name" xml:space="preserve">
+    <value>MissesLabel</value>
+  </data>
+  <data name="&gt;&gt;MissesLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MissesLabel.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;MissesLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;HitsLabel.Name" xml:space="preserve">
+    <value>HitsLabel</value>
+  </data>
+  <data name="&gt;&gt;HitsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HitsLabel.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;HitsLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;PlanesDestroyedLabel.Name" xml:space="preserve">
+    <value>PlanesDestroyedLabel</value>
+  </data>
+  <data name="&gt;&gt;PlanesDestroyedLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlanesDestroyedLabel.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;PlanesDestroyedLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;PlanesAliveLabel.Name" xml:space="preserve">
+    <value>PlanesAliveLabel</value>
+  </data>
+  <data name="&gt;&gt;PlanesAliveLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlanesAliveLabel.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;PlanesAliveLabel.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ScoreBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 31</value>
+  </data>
+  <data name="ScoreBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 300</value>
+  </data>
+  <data name="ScoreBar.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ScoreBar.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;ScoreBar.Name" xml:space="preserve">
+    <value>ScoreBar</value>
+  </data>
+  <data name="&gt;&gt;ScoreBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ScoreBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ScoreBar.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="OponentsMisses.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="OponentsMisses.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -675,29 +822,80 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="ScoreBar.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="&gt;&gt;OrientationLeft.Name" xml:space="preserve">
+    <value>OrientationLeft</value>
+  </data>
+  <data name="&gt;&gt;OrientationLeft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OrientationLeft.Parent" xml:space="preserve">
+    <value>PlaneOrietationBar</value>
+  </data>
+  <data name="&gt;&gt;OrientationLeft.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;OrientationRight.Name" xml:space="preserve">
+    <value>OrientationRight</value>
+  </data>
+  <data name="&gt;&gt;OrientationRight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OrientationRight.Parent" xml:space="preserve">
+    <value>PlaneOrietationBar</value>
+  </data>
+  <data name="&gt;&gt;OrientationRight.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;OrientationDown.Name" xml:space="preserve">
+    <value>OrientationDown</value>
+  </data>
+  <data name="&gt;&gt;OrientationDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OrientationDown.Parent" xml:space="preserve">
+    <value>PlaneOrietationBar</value>
+  </data>
+  <data name="&gt;&gt;OrientationDown.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;OrientationUp.Name" xml:space="preserve">
+    <value>OrientationUp</value>
+  </data>
+  <data name="&gt;&gt;OrientationUp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OrientationUp.Parent" xml:space="preserve">
+    <value>PlaneOrietationBar</value>
+  </data>
+  <data name="&gt;&gt;OrientationUp.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="PlaneOrietationBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 31</value>
   </data>
-  <data name="ScoreBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 300</value>
+  <data name="PlaneOrietationBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 298</value>
   </data>
-  <data name="ScoreBar.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="PlaneOrietationBar.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="ScoreBar.Visible" type="System.Boolean, mscorlib">
+  <data name="PlaneOrietationBar.Text" xml:space="preserve">
+    <value>Plane Orientation</value>
+  </data>
+  <data name="PlaneOrietationBar.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;ScoreBar.Name" xml:space="preserve">
-    <value>ScoreBar</value>
+  <data name="&gt;&gt;PlaneOrietationBar.Name" xml:space="preserve">
+    <value>PlaneOrietationBar</value>
   </data>
-  <data name="&gt;&gt;ScoreBar.Type" xml:space="preserve">
+  <data name="&gt;&gt;PlaneOrietationBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ScoreBar.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PlaneOrietationBar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ScoreBar.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;PlaneOrietationBar.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="OrientationLeft.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -709,13 +907,13 @@
     <value>24, 106</value>
   </data>
   <data name="OrientationLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 17</value>
+    <value>43, 17</value>
   </data>
   <data name="OrientationLeft.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="OrientationLeft.Text" xml:space="preserve">
-    <value>Orientation Left</value>
+    <value>Left</value>
   </data>
   <data name="&gt;&gt;OrientationLeft.Name" xml:space="preserve">
     <value>OrientationLeft</value>
@@ -739,13 +937,13 @@
     <value>24, 146</value>
   </data>
   <data name="OrientationRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 17</value>
+    <value>50, 17</value>
   </data>
   <data name="OrientationRight.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="OrientationRight.Text" xml:space="preserve">
-    <value>Orientation Right</value>
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;OrientationRight.Name" xml:space="preserve">
     <value>OrientationRight</value>
@@ -815,33 +1013,6 @@
   </data>
   <data name="&gt;&gt;OrientationUp.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="PlaneOrietationBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>344, 31</value>
-  </data>
-  <data name="PlaneOrietationBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 298</value>
-  </data>
-  <data name="PlaneOrietationBar.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="PlaneOrietationBar.Text" xml:space="preserve">
-    <value>Plane Orientation</value>
-  </data>
-  <data name="PlaneOrietationBar.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;PlaneOrietationBar.Name" xml:space="preserve">
-    <value>PlaneOrietationBar</value>
-  </data>
-  <data name="&gt;&gt;PlaneOrietationBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PlaneOrietationBar.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;PlaneOrietationBar.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -946,7 +1117,7 @@
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>GameBoard</value>
+    <value>GameBoardView</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

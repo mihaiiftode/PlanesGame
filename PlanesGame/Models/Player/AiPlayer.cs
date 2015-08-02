@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PlanesGame.Models.Player
 {
@@ -10,11 +11,11 @@ namespace PlanesGame.Models.Player
         public int PlanesDestroyed { get; set; }
         public int Hits { get; set; }
         public int Misses { get; set; }
-        public int OwnPlaneMatrix { get; set; }
-        public int OponentPlaneMatrix { get; set; }
+        public int[,] PlaneMatrix { get; set; }
+        public int[,] OponentPlaneMatrix { get; set; }
         public bool CanAttack { get; set; }
-        public Plane.Plane Plane { get; set; }
-
+        public bool CanSetup { get; set; }
+        public List<Plane.Plane> PlanesList { get; set; }
         public void Attack(int row, int collumn)
         {
             throw new NotImplementedException();

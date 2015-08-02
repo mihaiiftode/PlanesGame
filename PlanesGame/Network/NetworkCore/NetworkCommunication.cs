@@ -22,7 +22,7 @@ namespace PlanesGame.Network.NetworkCore
             Stream = targetNetwork.Stream;
         }
 
-        public void SendData(DataType dataType, string data = "")
+        public override void SendData(DataType dataType, string data = "")
         {
             try
             {

@@ -2,17 +2,15 @@
 {
     public enum DataType
     {
-        Connect = 0,
+        Connect = 1,
         Disconnect,
         StartGame,
         RestartGame,
         Attack,
-        EndGame,
+        AttackResponse,
         SetUp,
-        SetUpData,
         Won,
-        Lost,
         Message,
-        Acknowledge
+        Lost,
      }
 }

@@ -4,7 +4,7 @@ namespace PlanesGame.Views
 {
     public interface IKillRulesView
     {
-        void SetController(KillRuleController controller);
+        void SetController(KillRulesController controller);
 
         void GetGraphics();
 

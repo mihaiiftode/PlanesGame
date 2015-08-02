@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,49 +14,59 @@ namespace PlanesGame.Network.NetworkCore
         public new Socket Socket { get; set; }
         public new NetworkStream Stream { get; set; }
         private TcpListener _tcpListener;
+        private TcpClient _tcpClient;
 
         public override void StartService()
         {
             _tcpListener = TcpListener.Create(Common.IpEndPoint.Port);
-            Task.Factory.StartNew(ServerService);
+            var thread = new Thread(ServerService);
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void ServerService()
         {
             _tcpListener.Start();
-            Socket = _tcpListener.AcceptSocket();
-            try
-            {
-                Stream = new NetworkStream(Socket);
+            _tcpClient = _tcpListener.AcceptTcpClient();
+
+                Stream = _tcpClient.GetStream();
                 var buffer = new byte[1024];
                 var commandInterpreter = new CommandInterpreter();
                 var connectValidation = true;
-                while (true) 
+                while (true)
                 {
                     if (connectValidation)
                     {
-                        var dataType = (int)DataType.Connect; 
-                        var messageBytes = Encoding.UTF8.GetBytes(dataType.ToString());
-                        Stream.Write(messageBytes, 0, messageBytes.Length);
+                        Common.GameBoardController.ConnectionEstablished();
                         connectValidation = false;
                     }
 
-                    if (!Stream.DataAvailable) continue;
-                    var bytesRead = Stream.Read(buffer, 0, buffer.Length);
-                    var receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                    var streamReader = new StreamReader(Stream);
+                    var receivedMessage = streamReader.ReadLine();
+
                     if (commandInterpreter.ExecuteCommand(receivedMessage))
                     {
-                        MessageBox.Show("Remote Client Disconnected");
                         break;
                     }
                 }
                 Stream.Close();
                 _tcpListener.Stop();
+ 
+        }
+        public override void SendData(DataType dataType, string data = "")
+        {
+            try
+            {
+                var streamWriter = new StreamWriter(Stream);
+                streamWriter.WriteLine((int)dataType + " " + data);
+                streamWriter.Flush();
             }
             catch (Exception e)
             {
-                MessageBox.Show("Something went wrong with the connection " + e.Message);
+                MessageBox.Show("Something went wrong:" + e.Message);
             }
+
         }
     }
 }

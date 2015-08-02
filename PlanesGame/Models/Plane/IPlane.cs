@@ -11,6 +11,8 @@ namespace PlanesGame.Models.Plane
 
         int NumberOfCollumns { get; set; }
 
+        MatrixCoordinate PlaneStartPosition { get; set; }
+
         List<MatrixCoordinate> KillPoints { get; set; }
     }
 }

@@ -18,5 +18,7 @@ namespace PlanesGame.GameGraphics
         void SetTileMatrixSize(int rows, int collums);
 
         void UpdateTile(int x, int y, Color myColor);
+
+        MatrixCoordinate GetTilePosition(Point location);
     }
 }

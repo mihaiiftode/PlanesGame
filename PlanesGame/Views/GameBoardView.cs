@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using PlanesGame.Controllers;
@@ -8,6 +9,7 @@ namespace PlanesGame.Views
     public partial class GameBoardView : Form , IGameBoardView
     {
         private GameBoardController _controller;
+
         public GameBoardView()
         {
             InitializeComponent();
@@ -38,7 +40,8 @@ namespace PlanesGame.Views
 
         private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           // _controller.StartNewGame();
+            CallEngineStart();
+            _controller.StartNewGame();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48,11 +51,13 @@ namespace PlanesGame.Views
 
         private void hostAGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CallEngineStart();
            _controller.StartServer();
         }
 
         private void connectToGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CallEngineStart();
             _controller.ConnectToGame();
         }
 
@@ -79,7 +84,7 @@ namespace PlanesGame.Views
 
         private void setPlayerNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _controller.SetPlayerName();
+            _controller.SetPlayerRelatedData();
         }
 
         private void PlayerPanel_MouseClick(object sender, MouseEventArgs e)
@@ -91,9 +96,24 @@ namespace PlanesGame.Views
         {
             _controller.ExecuteAttack(e.Location);
         }
+        
+        private void CallEngineStart()
+        {
+            _controller.SetEnginePlayer(PlayerPanel.CreateGraphics(), PlayerPanel.ClientRectangle);
+            _controller.SetEngineOponent(OponentPanel.CreateGraphics(), OponentPanel.ClientRectangle);
+        }
 
-        public string ChatBoxText { get; set; }
-        public string ChatBoxInputText { get; set; }
+        public string MessageBoxInputText
+        {
+            get { return MessageBoxInput.Text; }
+            set { MessageBoxInput.Text = value; }
+        }
+
+        public string MessageBoxOutputText    
+        {
+            get { return MessageBoxOutput.Text; }
+            set { MessageBoxOutput.Text = value; }
+        }
         public void SetController(GameBoardController controller)
         {
             _controller = controller;
@@ -141,12 +161,12 @@ namespace PlanesGame.Views
 
         public void SetConnectionStatus(string data)
         {
-            throw new NotImplementedException();
+            ConnectionStatusLabel.Text = data;
         }
 
-        public void SetOponentsName(string data)
+        public void SetOponentName(string data)
         {
-            throw new NotImplementedException();
+            OponentNameLabel.Text = data;
         }
 
         public void SetGameStatus(string data)
@@ -156,12 +176,42 @@ namespace PlanesGame.Views
 
         public void SetPlaneOrientationVisibile(bool flag)
         {
-            throw new NotImplementedException();
+            PlaneOrietationBar.BeginInvoke((Action) (() =>
+            {
+                PlaneOrietationBar.Visible = flag;
+                PlaneOrietationBar.BringToFront();
+            }));
         }
 
         public void SetScoreBoardVisibile(bool flag)
         {
             throw new NotImplementedException();
+        }
+
+        public void AddMessage(string data)
+        {
+            MessageBoxOutput.BeginInvoke((Action)(() =>
+            {
+                MessageBoxOutput.AppendText(data);
+            }));
+        }
+
+        private void MessageSendButton_Click(object sender, EventArgs e)
+        {
+            _controller.SendMessage(MessageBoxInputText);
+            MessageBoxInput.Text = "";
+        }
+
+        private void MessageBoxInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            _controller.SendMessage(MessageBoxInputText);
+            MessageBoxInput.Text = "";
+        }
+
+        private void GameBoardView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _controller.Disconnect();
         }
     }
 }

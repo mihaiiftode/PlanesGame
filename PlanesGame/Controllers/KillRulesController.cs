@@ -7,7 +7,7 @@ using PlanesGame.Views;
 
 namespace PlanesGame.Controllers
 {
-    public class KillRuleController
+    public class KillRulesController
     {
         private Engine _engine;
 
@@ -15,7 +15,7 @@ namespace PlanesGame.Controllers
 
         private readonly IKillRulesView _view;
 
-        public KillRuleController(IKillRulesView view)
+        public KillRulesController(IKillRulesView view)
         {
             Plane = new Plane();
             _view = view;
