@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PlanesGame.Network.NetworkCore
@@ -26,30 +24,29 @@ namespace PlanesGame.Network.NetworkCore
 
         private void ClientService()
         {
-
-                Stream = _tcpClient.GetStream();
-                var buffer = new byte[1024]; 
-                var commandInterpreter = new CommandInterpreter();
-                var connectValidation = true;
-                while (true)
+            Stream = _tcpClient.GetStream();
+            var buffer = new byte[1024];
+            var commandInterpreter = new CommandInterpreter();
+            var connectValidation = true;
+            while (true)
+            {
+                if (connectValidation)
                 {
-                    if (connectValidation)
-                    {
-                        Common.GameBoardController.ConnectionEstablished();
-                        connectValidation = false;
-                    }
-
-                    var streamReader = new StreamReader(Stream);
-                    var receivedMessage =  streamReader.ReadLine();
-
-                    if (commandInterpreter.ExecuteCommand(receivedMessage))
-                    {
-                        break;
-                    }
+                    Common.GameBoardController.ConnectionEstablished();
+                    connectValidation = false;
                 }
 
+                var streamReader = new StreamReader(Stream);
+                var receivedMessage = streamReader.ReadLine();
 
+                if (commandInterpreter.ExecuteCommand(receivedMessage))
+                {
+                    break;
+                }
+            }
         }
+
+        public override ConnType ConnectionType { get { return ConnType.Client; } }
 
         public override void SendData(DataType dataType, string data = "")
         {
@@ -61,7 +58,7 @@ namespace PlanesGame.Network.NetworkCore
             }
             catch (Exception e)
             {
-                MessageBox.Show("Something went wrong:" + e.Message);
+                MessageBox.Show(@"Something went wrong:" + e.Message);
             }
 
         }
