@@ -133,7 +133,6 @@ namespace PlanesGame.Controllers
                     {
                         tileLocation.Column -= 1;
                         BuildPlane(tileLocation, plane);
-                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 case "down":
@@ -143,7 +142,6 @@ namespace PlanesGame.Controllers
                         tileLocation.Row -= 3;
                         planeRotator.SetPlaneDown(plane);
                         BuildPlane(tileLocation, plane);
-                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 case "right":
@@ -153,7 +151,6 @@ namespace PlanesGame.Controllers
                         tileLocation.Row -= 1;
                         planeRotator.SetPlaneRight(plane);
                         BuildPlane(tileLocation, plane);
-                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 case "left":
@@ -162,7 +159,6 @@ namespace PlanesGame.Controllers
                         tileLocation.Row -= 1;
                         planeRotator.SetPlaneLeft(plane);
                         BuildPlane(tileLocation, plane);
-                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 default:
@@ -180,8 +176,8 @@ namespace PlanesGame.Controllers
 
         private void BuildPlane(MatrixCoordinate matrixCoordinate, Plane plane)
         {
-            _firstPlayer.PlanesAlive++;
             if (CheckPlaneDuplicates(matrixCoordinate, plane)) return;
+            _firstPlayer.PlanesAlive++;
             var row = 0;
             for (var i = matrixCoordinate.Row; i < matrixCoordinate.Row + plane.NumberOfRows; i++, row++)
             {
@@ -209,7 +205,6 @@ namespace PlanesGame.Controllers
                 {
                     if (_firstPlayer.PlaneMatrix[i, j] != 1 || plane.PlaneMatrix[row, column] != 1) continue;
                     MessageBox.Show(@"Planes intersecting, retry!");
-                    _firstPlayer.PlanesAlive--;
                     return true;
                 }
             }
