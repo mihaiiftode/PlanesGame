@@ -48,7 +48,7 @@ namespace PlanesGame.Controllers
                             {
                                 _engine.UpdateTile(i, j, Color.Blue);
                                 Plane.PlaneMatrix[i, j] = 1;
-                                Plane.KillPoints.Remove(Plane.KillPoints.Find(points => matrixCoordinate.Collumn == points.Collumn && matrixCoordinate.Row == points.Row));
+                                Plane.KillPoints.Remove(Plane.KillPoints.Find(points => matrixCoordinate.Column == points.Column && matrixCoordinate.Row == points.Row));
                                 return;
                             }
                             break;

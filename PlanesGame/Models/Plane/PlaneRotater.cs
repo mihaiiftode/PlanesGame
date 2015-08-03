@@ -9,35 +9,42 @@ namespace PlanesGame.Models.Plane
         public void SetPlaneDown(Plane plane)
         {
             plane.Orientation = "down";
-            var matrixOperation =new MatrixOperations();
-            plane.PlaneMatrix = matrixOperation.Invert(plane.PlaneMatrix, plane.NumberOfRows,
-                           plane.NumberOfCollumns);
+            
+            for (var i = 0; i < 2; i++)
+            {
+                RotatePlaneMatrix(plane);
+            }
+
             UpdateKillPoints(plane);
         }
-
 
         public void SetPlaneRight(Plane plane)
         {
             plane.Orientation = "right";
-            var matrixOperation = new MatrixOperations();
-            plane.PlaneMatrix = matrixOperation.Rotate(plane.PlaneMatrix, plane.NumberOfRows,
-            plane.NumberOfCollumns);
-            plane.NumberOfCollumns = 4;
-            plane.NumberOfRows = 3;
+            RotatePlaneMatrix(plane);
             UpdateKillPoints(plane);
         }
+
         public void SetPlaneLeft(Plane plane)
         {
             plane.Orientation = "left";
-            var matrixOperation = new MatrixOperations();
-            plane.PlaneMatrix = matrixOperation.Rotate(plane.PlaneMatrix, plane.NumberOfRows,
-              plane.NumberOfCollumns);
-            plane.NumberOfCollumns = 4;
-            plane.NumberOfRows = 3;
-            plane.PlaneMatrix = matrixOperation.Invert(plane.PlaneMatrix, plane.NumberOfRows,
-                plane.NumberOfCollumns);
+            for (var i = 0; i < 3; i++)
+            {
+                RotatePlaneMatrix(plane);
+            }
             UpdateKillPoints(plane);
         }
+
+        private static void RotatePlaneMatrix(Plane plane)
+        {
+            var matrixOperation = new MatrixOperations();
+            plane.PlaneMatrix = matrixOperation.Rotate(plane.PlaneMatrix, plane.NumberOfRows,
+                plane.NumberOfCollumns);
+            var temp = plane.NumberOfRows;
+            plane.NumberOfRows = plane.NumberOfCollumns;
+            plane.NumberOfCollumns = temp;
+        }
+
         private static void UpdateKillPoints(Plane plane)
         {
             plane.KillPoints.Clear();

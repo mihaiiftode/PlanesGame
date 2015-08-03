@@ -95,7 +95,9 @@ namespace PlanesGame.Controllers
         public void SetPlayerRelatedData()
         {
             var playerConnectionView = new PlayerConnectionView();
-            var playerConnectionController =  _network.GetType() == typeof(Server) ? new PlayerConnectionController(playerConnectionView,false) :  new PlayerConnectionController(playerConnectionView,true);
+            var playerConnectionController = _network.GetType() == typeof (Server)
+                ? new PlayerConnectionController(playerConnectionView, false)
+                : new PlayerConnectionController(playerConnectionView, true);
             playerConnectionView.SetController(playerConnectionController);
             if (playerConnectionView.ShowDialog() == DialogResult.OK)
             {
@@ -106,7 +108,7 @@ namespace PlanesGame.Controllers
                 }
                 else
                 {
-                    Common.IpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"),2000);
+                    Common.IpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2000);
                 }
             }
             _firstPlayer.Name = playerConnectionController.PlayerConnectionInfo.Name;
@@ -116,7 +118,7 @@ namespace PlanesGame.Controllers
         {
             if (_firstPlayer.CanSetup == false) return;
             var tileLocation = _playerPanelEngine.GetTilePosition(location);
-            if(tileLocation.Row == -1 || tileLocation.Collumn == -1) return;
+            if (tileLocation.Row == -1 || tileLocation.Column == -1) return;
 
             var plane = new Plane
             {
@@ -127,32 +129,32 @@ namespace PlanesGame.Controllers
             switch (_planeOrientation)
             {
                 case "up":
-                    if (tileLocation.Row <= 6 && tileLocation.Collumn >= 1 && tileLocation.Collumn <= 8)
+                    if (tileLocation.Row <= 6 && tileLocation.Column >= 1 && tileLocation.Column <= 8)
                     {
-                        tileLocation.Collumn -= 1;
+                        tileLocation.Column -= 1;
                         BuildPlane(tileLocation, plane);
                     }
                     break;
                 case "down":
-                    if (tileLocation.Row >= 3 && tileLocation.Collumn >= 1 && tileLocation.Collumn <= 8)
+                    if (tileLocation.Row >= 3 && tileLocation.Column >= 1 && tileLocation.Column <= 8)
                     {
-                        tileLocation.Collumn -= 1;
+                        tileLocation.Column -= 1;
                         tileLocation.Row -= 3;
                         planeRotator.SetPlaneDown(plane);
-                        BuildPlane(tileLocation, plane); 
+                        BuildPlane(tileLocation, plane);
                     }
                     break;
                 case "right":
-                    if (tileLocation.Collumn >= 3 && tileLocation.Row >= 1 && tileLocation.Row <= 8)
+                    if (tileLocation.Column >= 3 && tileLocation.Row >= 1 && tileLocation.Row <= 8)
                     {
-                        tileLocation.Collumn -= 3;
+                        tileLocation.Column -= 3;
                         tileLocation.Row -= 1;
                         planeRotator.SetPlaneRight(plane);
                         BuildPlane(tileLocation, plane);
                     }
                     break;
                 case "left":
-                    if (tileLocation.Collumn <= 6 && tileLocation.Row >= 1 && tileLocation.Row <= 8)
+                    if (tileLocation.Column <= 6 && tileLocation.Row >= 1 && tileLocation.Row <= 8)
                     {
                         tileLocation.Row -= 1;
                         planeRotator.SetPlaneLeft(plane);
@@ -160,7 +162,8 @@ namespace PlanesGame.Controllers
                     }
                     break;
                 default:
-                    MessageBox.Show(@"Please select a plane orientation"); return;
+                    MessageBox.Show(@"Please select a plane orientation");
+                    return;
             }
             plane.PlaneStartPosition = tileLocation;
             _firstPlayer.PlanesList.Add(plane);
@@ -170,32 +173,37 @@ namespace PlanesGame.Controllers
                 _network.SendData(DataType.StartGame);
             }
         }
-        
+
         private void BuildPlane(MatrixCoordinate matrixCoordinate, Plane plane)
         {
             _firstPlayer.PlanesAlive++;
-            if( CheckPlaneDuplicates(matrixCoordinate,plane)) return;
+            if (CheckPlaneDuplicates(matrixCoordinate, plane)) return;
             var row = 0;
             for (var i = matrixCoordinate.Row; i < matrixCoordinate.Row + plane.NumberOfRows; i++, row++)
             {
-                var collumn = 0;
-                for (var j = matrixCoordinate.Collumn; j < matrixCoordinate.Collumn + plane.NumberOfCollumns; j++, collumn++)
-               {
-                    if (plane.PlaneMatrix[row, collumn] == 0) continue;
+                var column = 0;
+                for (var j = matrixCoordinate.Column;
+                    j < matrixCoordinate.Column + plane.NumberOfCollumns;
+                    j++, column++)
+                {
+                    if (plane.PlaneMatrix[row, column] == 0) continue;
                     _playerPanelEngine.UpdateTile(i, j, Color.Blue);
-                    _firstPlayer.PlaneMatrix[i, j] = plane.PlaneMatrix[row, collumn];
+                    _firstPlayer.PlaneMatrix[i, j] = plane.PlaneMatrix[row, column];
                 }
             }
         }
+
         private bool CheckPlaneDuplicates(MatrixCoordinate matrixCoordinate, Plane plane)
         {
             var row = 0;
             for (var i = matrixCoordinate.Row; i < matrixCoordinate.Row + plane.NumberOfRows; i++, row++)
             {
-                var collumn = 0;
-                for (var j = matrixCoordinate.Collumn; j < matrixCoordinate.Collumn + plane.NumberOfCollumns; j++, collumn++)
+                var column = 0;
+                for (var j = matrixCoordinate.Column;
+                    j < matrixCoordinate.Column + plane.NumberOfCollumns;
+                    j++, column++)
                 {
-                    if (_firstPlayer.PlaneMatrix[i, j] != 1 || plane.PlaneMatrix[row, collumn] != 1) continue;
+                    if (_firstPlayer.PlaneMatrix[i, j] != 1 || plane.PlaneMatrix[row, column] != 1) continue;
                     MessageBox.Show(@"Planes intersecting, retry!");
                     _firstPlayer.PlanesAlive--;
                     return true;
@@ -208,7 +216,7 @@ namespace PlanesGame.Controllers
         {
             if (!_firstPlayer.CanAttack) return;
             var tileLocation = _oponentPanelEngine.GetTilePosition(location);
-            if (tileLocation.Row == -1 || tileLocation.Collumn == -1) return;
+            if (tileLocation.Row == -1 || tileLocation.Column == -1) return;
             _network.SendData(DataType.Attack, tileLocation.ToString());
             _firstPlayer.CanAttack = false;
         }
@@ -235,7 +243,7 @@ namespace PlanesGame.Controllers
             if (_network.GetType() == typeof (Server))
             {
                 var killpoints = "killpoints:";
-               _planeTemplate.KillPoints.ForEach(killpoint => killpoints += killpoint.ToString() + " ");
+                _planeTemplate.KillPoints.ForEach(killpoint => killpoints += killpoint.ToString() + " ");
                 _network.SendData(DataType.SetUp, killpoints);
             }
         }
@@ -251,7 +259,7 @@ namespace PlanesGame.Controllers
 
         public void AddMessage(string data)
         {
-            _view.AddMessage(_secondPlayer.Name +" >> " + data + Environment.NewLine);
+            _view.AddMessage(_secondPlayer.Name + " >> " + data + Environment.NewLine);
         }
 
         public void SendMessage(string messageBoxInputText)
@@ -276,7 +284,7 @@ namespace PlanesGame.Controllers
                             int.Parse(point[1].ToString())));
                 }
             }
-            if(data.Contains("name: "))
+            if (data.Contains("name: "))
             {
                 data = data.Remove(0, "name: ".Count());
                 _secondPlayer.Name = data;
@@ -293,10 +301,11 @@ namespace PlanesGame.Controllers
         {
             _firstPlayer.CanAttack = true;
             _currentAttackPoint = new MatrixCoordinate(int.Parse(data[1].ToString()), int.Parse(data[2].ToString()));
-            if (_firstPlayer.PlaneMatrix[_currentAttackPoint.Row, _currentAttackPoint.Collumn] == 0)
+            if (_firstPlayer.PlaneMatrix[_currentAttackPoint.Row, _currentAttackPoint.Column] == 0)
             {
                 _network.SendData(DataType.AttackResponse, "m" + _currentAttackPoint);
-                _playerPanelEngine.UpdateTile(_currentAttackPoint.Row,_currentAttackPoint.Collumn, Color.Cyan);
+                _playerPanelEngine.UpdateTile(_currentAttackPoint.Row, _currentAttackPoint.Column, Color.Cyan);
+                _firstPlayer.PlaneMatrix[_currentAttackPoint.Row, _currentAttackPoint.Column] = 4; // 4 - plane miss
                 return;
             }
             _firstPlayer.PlanesList.ForEach(plane =>
@@ -306,7 +315,7 @@ namespace PlanesGame.Controllers
                     var killPointToFind = plane.KillPoints.Find(
                         killpoint =>
                             killpoint.Row == _currentAttackPoint.Row - plane.PlaneStartPosition.Row &&
-                            killpoint.Collumn == _currentAttackPoint.Collumn - plane.PlaneStartPosition.Collumn);
+                            killpoint.Column == _currentAttackPoint.Column - plane.PlaneStartPosition.Column);
                     if (killPointToFind != null)
                     {
                         plane.KillPoints.Remove(killPointToFind);
@@ -319,8 +328,9 @@ namespace PlanesGame.Controllers
                     else
                     {
                         _network.SendData(DataType.AttackResponse, "h" + _currentAttackPoint);
-                        _playerPanelEngine.UpdateTile(_currentAttackPoint.Row, _currentAttackPoint.Collumn, Color.Red);
+                        _playerPanelEngine.UpdateTile(_currentAttackPoint.Row, _currentAttackPoint.Column, Color.Red);
                     }
+                    _firstPlayer.PlaneMatrix[_currentAttackPoint.Row, _currentAttackPoint.Column] = 3; // 3 - hit plane
                 }
             });
         }
@@ -329,26 +339,73 @@ namespace PlanesGame.Controllers
         {
             return hitpoint.Row >= plane.PlaneStartPosition.Row &&
                    hitpoint.Row <= plane.PlaneStartPosition.Row + plane.NumberOfRows &&
-                   hitpoint.Collumn >= plane.PlaneStartPosition.Collumn &&
-                   hitpoint.Collumn <= plane.PlaneStartPosition.Collumn + plane.NumberOfCollumns;
+                   hitpoint.Column >= plane.PlaneStartPosition.Column &&
+                   hitpoint.Column <= plane.PlaneStartPosition.Column + plane.NumberOfCollumns;
         }
 
         public void AttackResponse(string data)
         {
+            
             if (data[1] == 'h')
             {
-                _oponentPanelEngine.UpdateTile(int.Parse(data[2].ToString()),int.Parse(data[3].ToString()), Color.Brown);
+                var matrixCoordonate = new MatrixCoordinate(int.Parse(data[2].ToString()), int.Parse(data[3].ToString()));
+                _oponentPanelEngine.UpdateTile(matrixCoordonate.Row, matrixCoordonate.Column, Color.Brown);
+                _firstPlayer.OponentPlaneMatrix[matrixCoordonate.Row, matrixCoordonate.Column] = 3; // 3 - hit
             }
             if (data[1] == 'm')
             {
-                _oponentPanelEngine.UpdateTile(int.Parse(data[2].ToString()), int.Parse(data[3].ToString()), Color.Cyan);
+                var matrixCoordonate = new MatrixCoordinate(int.Parse(data[2].ToString()), int.Parse(data[3].ToString()));
+                _oponentPanelEngine.UpdateTile(matrixCoordonate.Row, matrixCoordonate.Column, Color.Cyan);
+                _firstPlayer.OponentPlaneMatrix[matrixCoordonate.Row, matrixCoordonate.Column] = 4; // 3 - miss
             }
             if (data[1] == 'd')
             {
-                if (data[2] == 'u') ;
-                if (data[2] == 'd') ;
-                if (data[2] == 'l') ;
-                if (data[2] == 'r') ;
+                var matrixCoordonate = new MatrixCoordinate(int.Parse(data[3].ToString()), int.Parse(data[4].ToString()));
+                if (data[2] == 'u')
+                    BuildOponentPlane(matrixCoordonate, "up");
+                if (data[2] == 'd')
+                    BuildOponentPlane(matrixCoordonate, "down");
+                if (data[2] == 'l')
+                    BuildOponentPlane(matrixCoordonate, "left");
+                if (data[2] == 'r')
+                    BuildOponentPlane(matrixCoordonate, "right");
+            }
+        }
+
+        private void BuildOponentPlane(MatrixCoordinate startCoordinate, string direction)
+        {
+            var plane = new Plane();
+            var planeRotator = new PlaneRotater();
+            switch (direction)
+            {
+                case "up":
+
+                    break;
+                case "down":
+                    planeRotator.SetPlaneDown(plane);
+                    break;
+                case "right":
+                    planeRotator.SetPlaneRight(plane);
+                    break;
+                case "left":
+                    planeRotator.SetPlaneLeft(plane);
+                    break;
+            }
+            var row = 0;
+            for (var i = startCoordinate.Row; i < startCoordinate.Row + plane.NumberOfRows; i++, row++)
+            {
+                var collumn = 0;
+                for (var j = startCoordinate.Column;
+                    j < startCoordinate.Column + plane.NumberOfCollumns;
+                    j++, collumn++)
+                {
+                    if (plane.PlaneMatrix[row,collumn] != 0)
+                    {
+                        _oponentPanelEngine.UpdateTile(i, j, Color.Red);
+                        _firstPlayer.OponentPlaneMatrix[i,j] = plane.PlaneMatrix[row, collumn];
+                    }
+
+                }
             }
         }
     }
