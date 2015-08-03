@@ -3,7 +3,7 @@ using PlanesGame.GameGraphics;
 
 namespace PlanesGame.Models.Plane
 {
-    public class PlaneRotater
+    public class PlaneRotator
     {
 
         public void SetPlaneDown(Plane plane)

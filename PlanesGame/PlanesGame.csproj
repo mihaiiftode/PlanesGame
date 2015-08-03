@@ -60,7 +60,7 @@
     <Compile Include="GameCore\MatrixOperations.cs" />
     <Compile Include="GameGraphics\MatrixCoordinate.cs" />
     <Compile Include="Models\Plane\Plane.cs" />
-    <Compile Include="Models\Plane\PlaneRotater.cs" />
+    <Compile Include="Models\Plane\PlaneRotator.cs" />
     <Compile Include="Models\PlayerConnectionInfo.cs" />
     <Compile Include="Models\PlayerFactory\ConcretePlayerFactory.cs" />
     <Compile Include="Models\PlayerFactory\PlayerFactory.cs" />
@@ -82,7 +82,6 @@
     <Compile Include="Network\CommandInterpreter.cs" />
     <Compile Include="Network\DataType.cs" />
     <Compile Include="Network\Factory\UserNetworkFactory.cs" />
-    <Compile Include="Network\NetworkCore\NetworkCommunication.cs" />
     <Compile Include="Network\Factory\NetworkFactory.cs" />
     <Compile Include="Network\NetworkCore\Server.cs" />
     <Compile Include="Models\Player\IPlayer.cs" />

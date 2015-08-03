@@ -125,7 +125,7 @@ namespace PlanesGame.Controllers
                 PlaneMatrix = _planeTemplate.PlaneMatrix,
                 KillPoints = _planeTemplate.KillPoints.ToList()
             };
-            var planeRotator = new PlaneRotater();
+            var planeRotator = new PlaneRotator();
             switch (_planeOrientation)
             {
                 case "up":
@@ -133,6 +133,7 @@ namespace PlanesGame.Controllers
                     {
                         tileLocation.Column -= 1;
                         BuildPlane(tileLocation, plane);
+                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 case "down":
@@ -142,6 +143,7 @@ namespace PlanesGame.Controllers
                         tileLocation.Row -= 3;
                         planeRotator.SetPlaneDown(plane);
                         BuildPlane(tileLocation, plane);
+                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 case "right":
@@ -151,6 +153,7 @@ namespace PlanesGame.Controllers
                         tileLocation.Row -= 1;
                         planeRotator.SetPlaneRight(plane);
                         BuildPlane(tileLocation, plane);
+                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 case "left":
@@ -159,6 +162,7 @@ namespace PlanesGame.Controllers
                         tileLocation.Row -= 1;
                         planeRotator.SetPlaneLeft(plane);
                         BuildPlane(tileLocation, plane);
+                        _firstPlayer.PlanesList.Add(plane);
                     }
                     break;
                 default:
@@ -166,7 +170,7 @@ namespace PlanesGame.Controllers
                     return;
             }
             plane.PlaneStartPosition = tileLocation;
-            _firstPlayer.PlanesList.Add(plane);
+            
             if (_firstPlayer.PlanesAlive == 4)
             {
                 _firstPlayer.CanSetup = false;
@@ -345,7 +349,6 @@ namespace PlanesGame.Controllers
 
         public void AttackResponse(string data)
         {
-            
             if (data[1] == 'h')
             {
                 var matrixCoordonate = new MatrixCoordinate(int.Parse(data[2].ToString()), int.Parse(data[3].ToString()));
@@ -375,7 +378,7 @@ namespace PlanesGame.Controllers
         private void BuildOponentPlane(MatrixCoordinate startCoordinate, string direction)
         {
             var plane = new Plane();
-            var planeRotator = new PlaneRotater();
+            var planeRotator = new PlaneRotator();
             switch (direction)
             {
                 case "up":
@@ -404,7 +407,6 @@ namespace PlanesGame.Controllers
                         _oponentPanelEngine.UpdateTile(i, j, Color.Red);
                         _firstPlayer.OponentPlaneMatrix[i,j] = plane.PlaneMatrix[row, column];
                     }
-
                 }
             }
         }
