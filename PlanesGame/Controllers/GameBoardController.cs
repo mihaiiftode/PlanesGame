@@ -183,7 +183,7 @@ namespace PlanesGame.Controllers
             {
                 var column = 0;
                 for (var j = matrixCoordinate.Column;
-                    j < matrixCoordinate.Column + plane.NumberOfCollumns;
+                    j < matrixCoordinate.Column + plane.NumberOfColumns;
                     j++, column++)
                 {
                     if (plane.PlaneMatrix[row, column] == 0) continue;
@@ -200,7 +200,7 @@ namespace PlanesGame.Controllers
             {
                 var column = 0;
                 for (var j = matrixCoordinate.Column;
-                    j < matrixCoordinate.Column + plane.NumberOfCollumns;
+                    j < matrixCoordinate.Column + plane.NumberOfColumns;
                     j++, column++)
                 {
                     if (_firstPlayer.PlaneMatrix[i, j] != 1 || plane.PlaneMatrix[row, column] != 1) continue;
@@ -340,7 +340,7 @@ namespace PlanesGame.Controllers
             return hitpoint.Row >= plane.PlaneStartPosition.Row &&
                    hitpoint.Row <= plane.PlaneStartPosition.Row + plane.NumberOfRows &&
                    hitpoint.Column >= plane.PlaneStartPosition.Column &&
-                   hitpoint.Column <= plane.PlaneStartPosition.Column + plane.NumberOfCollumns;
+                   hitpoint.Column <= plane.PlaneStartPosition.Column + plane.NumberOfColumns;
         }
 
         public void AttackResponse(string data)
@@ -394,15 +394,15 @@ namespace PlanesGame.Controllers
             var row = 0;
             for (var i = startCoordinate.Row; i < startCoordinate.Row + plane.NumberOfRows; i++, row++)
             {
-                var collumn = 0;
+                var column = 0;
                 for (var j = startCoordinate.Column;
-                    j < startCoordinate.Column + plane.NumberOfCollumns;
-                    j++, collumn++)
+                    j < startCoordinate.Column + plane.NumberOfColumns;
+                    j++, column++)
                 {
-                    if (plane.PlaneMatrix[row,collumn] != 0)
+                    if (plane.PlaneMatrix[row,column] != 0)
                     {
                         _oponentPanelEngine.UpdateTile(i, j, Color.Red);
-                        _firstPlayer.OponentPlaneMatrix[i,j] = plane.PlaneMatrix[row, collumn];
+                        _firstPlayer.OponentPlaneMatrix[i,j] = plane.PlaneMatrix[row, column];
                     }
 
                 }

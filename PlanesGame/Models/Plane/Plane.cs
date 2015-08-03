@@ -7,7 +7,7 @@ namespace PlanesGame.Models.Plane
     {
         public int[,] PlaneMatrix { get; set; }
         public int NumberOfRows { get; set; }
-        public int NumberOfCollumns { get; set; }
+        public int NumberOfColumns { get; set; }
         public MatrixCoordinate PlaneStartPosition { get; set; }
         public List<MatrixCoordinate> KillPoints { get; set; }
 
@@ -18,7 +18,7 @@ namespace PlanesGame.Models.Plane
             Orientation = "up";
             KillPoints = new List<MatrixCoordinate>();
             NumberOfRows = 4;
-            NumberOfCollumns = 3;
+            NumberOfColumns = 3;
             PlaneMatrix = new[,]
             {
                 {0, 1, 0},

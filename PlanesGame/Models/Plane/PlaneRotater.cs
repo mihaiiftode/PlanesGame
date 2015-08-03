@@ -39,10 +39,10 @@ namespace PlanesGame.Models.Plane
         {
             var matrixOperation = new MatrixOperations();
             plane.PlaneMatrix = matrixOperation.Rotate(plane.PlaneMatrix, plane.NumberOfRows,
-                plane.NumberOfCollumns);
+                plane.NumberOfColumns);
             var temp = plane.NumberOfRows;
-            plane.NumberOfRows = plane.NumberOfCollumns;
-            plane.NumberOfCollumns = temp;
+            plane.NumberOfRows = plane.NumberOfColumns;
+            plane.NumberOfColumns = temp;
         }
 
         private static void UpdateKillPoints(Plane plane)
@@ -50,7 +50,7 @@ namespace PlanesGame.Models.Plane
             plane.KillPoints.Clear();
             for (var i = 0; i < plane.NumberOfRows; i++)
             {
-                for (var j = 0; j < plane.NumberOfCollumns; j++)
+                for (var j = 0; j < plane.NumberOfColumns; j++)
                 {
                     if (plane.PlaneMatrix[i, j] == 2)
                         plane.KillPoints.Add(new MatrixCoordinate(i, j));

@@ -9,7 +9,7 @@ namespace PlanesGame.Models.Plane
 
         int NumberOfRows { get; set; }
 
-        int NumberOfCollumns { get; set; }
+        int NumberOfColumns { get; set; }
 
         MatrixCoordinate PlaneStartPosition { get; set; }
 
