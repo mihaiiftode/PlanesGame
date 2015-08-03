@@ -4,17 +4,17 @@
     {
         public int Row { get; set; }
 
-        public int Collumn { get; set; }
+        public int Column { get; set; }
 
-        public MatrixCoordinate(int row, int collumn)
+        public MatrixCoordinate(int row, int column)
         {
             Row = row;
-            Collumn = collumn;
+            Column = column;
         }
 
         public override string ToString()
         {
-            return Row + Collumn.ToString();
+            return Row + Column.ToString();
         }
     }
 }
