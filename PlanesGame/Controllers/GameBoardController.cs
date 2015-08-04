@@ -25,28 +25,51 @@ namespace PlanesGame.Controllers
         private IPlayer _firstPlayer;
         private IPlayer _secondPlayer;
         private PlayerConnectionInfo _playerConnectionInfo;
+        private bool _gameInProgress = false;
         private bool _connected = false;
         private string _planeOrientation;
-        private GameArbiter gameArbiter;
+        private readonly GameArbiter _gameArbiter;
         private Plane _planeTemplate;
         private MatrixCoordinate _currentAttackPoint;
+        private string _oponentType;
 
         public GameBoardController(IGameBoardView view)
         {
             _view = view;
             Common.GameBoardController = this;
-            gameArbiter = new GameArbiter();
-            Common.GameArbiter = gameArbiter;
+            _gameArbiter = new GameArbiter();
+            Common.GameArbiter = _gameArbiter;
+            _oponentType = "network";
         }
 
         public void StartNewGame()
         {
-            if (_connected)
+            if (_gameInProgress)
             {
+                ResetGameAssests();
                 SetKillRules();
                 SendGameInfo();
+                _view.SetPlaneOrientationVisibile(true);
             }
-            _view.SetPlaneOrientationVisibile(true);
+        }
+
+        private void ResetGameAssests()
+        {
+            var name = _firstPlayer.Name;
+            var playerFactory = new ConcretePlayerFactory();
+            _firstPlayer = new Player{Name = name};
+            name = _secondPlayer.Name;
+            _secondPlayer = playerFactory.CreatePlayer(_oponentType);
+            _secondPlayer.Name = name;
+        }
+
+        public void Redraw()
+        {
+            if (_playerPanelEngine != null && _oponentPanelEngine != null)
+            {
+                _playerPanelEngine.Draw();
+                _oponentPanelEngine.Draw();
+            }
         }
 
         public void ConnectToGame()
@@ -61,18 +84,22 @@ namespace PlanesGame.Controllers
 
         private void InitiateNetwork(string type)
         {
+            _view.SetGameStatus("Awaiting Game Start");
             var networkFactory = new UserNetworkFactory();
 
             _firstPlayer = new Player();
             _secondPlayer = new Player();
             _network = networkFactory.CreateNetwork(type);
             SetPlayerRelatedData();
+
             _network.StartService();
         }
 
         public void Disconnect()
         {
+            if (!_gameInProgress) return;
             _network.SendData(DataType.Disconnect);
+            _gameInProgress = false;
         }
 
         public void SetOponent(string type)
@@ -89,6 +116,8 @@ namespace PlanesGame.Controllers
             var killRulesController = new KillRulesController(killRulesView);
             if (killRulesView.ShowDialog() != DialogResult.OK) return;
 
+            _firstPlayer.CanSetup = true;
+            _view.SetGameStatus("Setting up Planes, You must set 4!");
             _planeTemplate = killRulesController.Plane;
         }
 
@@ -102,21 +131,17 @@ namespace PlanesGame.Controllers
             if (playerConnectionView.ShowDialog() == DialogResult.OK)
             {
                 _playerConnectionInfo = playerConnectionController.PlayerConnectionInfo;
-                if (_playerConnectionInfo.RemoteAddress != null)
-                {
-                    Common.IpEndPoint = new IPEndPoint(_playerConnectionInfo.RemoteAddress, 2000);
-                }
-                else
-                {
-                    Common.IpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2000);
-                }
+                Common.IpEndPoint = _playerConnectionInfo.RemoteAddress != null ? 
+                    new IPEndPoint(_playerConnectionInfo.RemoteAddress, 2000) : 
+                    new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2000);
             }
             _firstPlayer.Name = playerConnectionController.PlayerConnectionInfo.Name;
         }
 
         public void SetUp(Point location)
         {
-            if (_firstPlayer.CanSetup == false) return;
+            if (_gameInProgress == false) return;
+            if (_firstPlayer.CanSetup == false ) return;
             var tileLocation = _playerPanelEngine.GetTilePosition(location);
             if (tileLocation.Row == -1 || tileLocation.Column == -1) return;
 
@@ -166,11 +191,19 @@ namespace PlanesGame.Controllers
                     return;
             }
             plane.PlaneStartPosition = tileLocation;
-            
+
             if (_firstPlayer.PlanesAlive == 4)
             {
+                _view.SetPlaneOrientationVisibile(false);
+                _view.SetScoreBoardVisibile(true);
                 _firstPlayer.CanSetup = false;
                 _network.SendData(DataType.StartGame);
+                if(_network.GetType() == typeof(Server))
+                    _view.SetGameStatus("You can attack!");
+                else
+                {
+                    _view.SetGameStatus("You can not attack!");
+                }
             }
         }
 
@@ -204,7 +237,7 @@ namespace PlanesGame.Controllers
                     j < matrixCoordinate.Column + plane.NumberOfColumns;
                     j++, column++)
                 {
-                    if (_firstPlayer.PlaneMatrix[i, j] != 1 || plane.PlaneMatrix[row, column] != 1) continue;
+                    if (_firstPlayer.PlaneMatrix[i, j] ==0 || plane.PlaneMatrix[row, column] != 1) continue;
                     MessageBox.Show(@"Planes intersecting, retry!");
                     return true;
                 }
@@ -214,11 +247,18 @@ namespace PlanesGame.Controllers
 
         public void ExecuteAttack(Point location)
         {
-            if (!_firstPlayer.CanAttack) return;
+            if ( _gameInProgress == false ) return;
+            if (_firstPlayer.CanAttack == false) return;
             var tileLocation = _oponentPanelEngine.GetTilePosition(location);
             if (tileLocation.Row == -1 || tileLocation.Column == -1) return;
-            _network.SendData(DataType.Attack, tileLocation.ToString());
+            if (_firstPlayer.OponentPlaneMatrix[tileLocation.Row, tileLocation.Column] != 0)
+            {
+                MessageBox.Show(@"Already attacked here!");
+                return;
+            }
             _firstPlayer.CanAttack = false;
+            _view.SetGameStatus("You can not attack!");
+            _network.SendData(DataType.Attack, tileLocation.ToString());
         }
 
         public void SetEnginePlayer(Graphics graphicsObject, Rectangle clientRectangle)
@@ -252,9 +292,8 @@ namespace PlanesGame.Controllers
         {
             _network.SendData(DataType.SetUp, "name: " + _firstPlayer.Name);
             _view.SetConnectionStatus("Status: Connected!");
+            _gameInProgress = true;
             _connected = true;
-            _firstPlayer.CanSetup = true;
-            StartNewGame();
         }
 
         public void AddMessage(string data)
@@ -264,7 +303,7 @@ namespace PlanesGame.Controllers
 
         public void SendMessage(string messageBoxInputText)
         {
-            if (!messageBoxInputText.Equals(""))
+            if (!messageBoxInputText.Equals("") && _gameInProgress)
             {
                 _network.SendData(DataType.Message, messageBoxInputText);
                 _view.AddMessage("You >> " + messageBoxInputText + Environment.NewLine);
@@ -286,14 +325,15 @@ namespace PlanesGame.Controllers
                         _planeTemplate.KillPoints.Add(matrixCoordinate);
                         _planeTemplate.PlaneMatrix[matrixCoordinate.Row, matrixCoordinate.Column] = 2;
                     }
-                    
                 }
+                _view.SetGameStatus("Setting up Planes, You must set 4!");
+                _firstPlayer.CanSetup = true;
             }
             if (data.Contains("name: "))
             {
                 data = data.Remove(0, "name: ".Count());
                 _secondPlayer.Name = data;
-                _view.SetOponentName(data);
+                _view.SetOponentName("Oponent: "+data);
             }
         }
 
@@ -305,13 +345,16 @@ namespace PlanesGame.Controllers
         public void Attacked(string data)
         {
             _firstPlayer.CanAttack = true;
+            _view.SetGameStatus("You can attack!");
             _currentAttackPoint = new MatrixCoordinate(int.Parse(data[1].ToString()), int.Parse(data[2].ToString()));
             if (_firstPlayer.PlaneMatrix[_currentAttackPoint.Row, _currentAttackPoint.Column] == 0)
             {
                 _network.SendData(DataType.AttackResponse, "m" + _currentAttackPoint);
                 _playerPanelEngine.UpdateTile(_currentAttackPoint.Row, _currentAttackPoint.Column, Color.Cyan);
                 _firstPlayer.PlaneMatrix[_currentAttackPoint.Row, _currentAttackPoint.Column] = 4; // 4 - plane miss
+                _secondPlayer.Misses++;
                 return;
+               
             }
             _firstPlayer.PlanesList.ForEach(plane =>
             {
@@ -323,21 +366,42 @@ namespace PlanesGame.Controllers
                             killpoint.Column == _currentAttackPoint.Column - plane.PlaneStartPosition.Column);
                     if (killPointToFind != null)
                     {
+                        _secondPlayer.Hits++;
+                        _network.SendData(DataType.AttackResponse, "h" + _currentAttackPoint);
+                        _playerPanelEngine.UpdateTile(_currentAttackPoint.Row, _currentAttackPoint.Column, Color.Red);
                         plane.KillPoints.Remove(killPointToFind);
                         if (plane.KillPoints.Count == 0)
                         {
+                            _firstPlayer.PlanesAlive--;
                             _network.SendData(DataType.AttackResponse,
                                 "d" + plane.Orientation[0] + plane.PlaneStartPosition);
+                            var row = 0;
+                            for (var i = plane.PlaneStartPosition.Row; i < plane.PlaneStartPosition.Row + plane.NumberOfRows; i++, row++)
+                            {
+                                var column = 0;
+                                for (var j = plane.PlaneStartPosition.Column;
+                                    j < plane.PlaneStartPosition.Column + plane.NumberOfColumns;
+                                    j++, column++)
+                                {
+                                    if (plane.PlaneMatrix[row, column] != 0)
+                                    {
+                                        _playerPanelEngine.UpdateTile(i, j, Color.Red);
+                                        _firstPlayer.PlaneMatrix[i, j] = 3;
+                                    }
+                                }
+                            }
                         }
                     }
                     else
                     {
+                        _secondPlayer.Hits++;
                         _network.SendData(DataType.AttackResponse, "h" + _currentAttackPoint);
                         _playerPanelEngine.UpdateTile(_currentAttackPoint.Row, _currentAttackPoint.Column, Color.Red);
                     }
                     _firstPlayer.PlaneMatrix[_currentAttackPoint.Row, _currentAttackPoint.Column] = 3; // 3 - hit plane
                 }
             });
+            CheckGameEnd();
         }
 
         private static bool PlaneContains(MatrixCoordinate hitpoint, Plane plane)
@@ -352,18 +416,21 @@ namespace PlanesGame.Controllers
         {
             if (data[1] == 'h')
             {
+                _firstPlayer.Hits++;
                 var matrixCoordonate = new MatrixCoordinate(int.Parse(data[2].ToString()), int.Parse(data[3].ToString()));
-                _oponentPanelEngine.UpdateTile(matrixCoordonate.Row, matrixCoordonate.Column, Color.Brown);
+                _oponentPanelEngine.UpdateTile(matrixCoordonate.Row, matrixCoordonate.Column, Color.Red);
                 _firstPlayer.OponentPlaneMatrix[matrixCoordonate.Row, matrixCoordonate.Column] = 3; // 3 - hit
             }
             if (data[1] == 'm')
             {
+                _firstPlayer.Misses++;
                 var matrixCoordonate = new MatrixCoordinate(int.Parse(data[2].ToString()), int.Parse(data[3].ToString()));
                 _oponentPanelEngine.UpdateTile(matrixCoordonate.Row, matrixCoordonate.Column, Color.Cyan);
                 _firstPlayer.OponentPlaneMatrix[matrixCoordonate.Row, matrixCoordonate.Column] = 4; // 3 - miss
             }
             if (data[1] == 'd')
             {
+                _secondPlayer.PlanesAlive--;
                 var matrixCoordonate = new MatrixCoordinate(int.Parse(data[3].ToString()), int.Parse(data[4].ToString()));
                 if (data[2] == 'u')
                     BuildOponentPlane(matrixCoordonate, "up");
@@ -373,6 +440,18 @@ namespace PlanesGame.Controllers
                     BuildOponentPlane(matrixCoordonate, "left");
                 if (data[2] == 'r')
                     BuildOponentPlane(matrixCoordonate, "right");
+            }
+            CheckGameEnd();
+        }
+
+        private void CheckGameEnd()
+        {
+            if (_firstPlayer.PlanesAlive == 0)
+            {
+                MessageBox.Show("You Won!");
+                _view.SetGameStatus("You Won!");
+                _network.SendData(DataType.Lost);
+                _firstPlayer.CanAttack = false;
             }
         }
 
@@ -410,6 +489,13 @@ namespace PlanesGame.Controllers
                     }
                 }
             }
+        }
+
+        public void GameLost()
+        {
+            _firstPlayer.CanAttack = false;
+            MessageBox.Show(@"You lost!");
+            _view.SetGameStatus("You lost!");
         }
     }
 }

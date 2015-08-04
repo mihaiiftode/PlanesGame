@@ -24,25 +24,34 @@ namespace PlanesGame.Network.NetworkCore
 
         private void ClientService()
         {
-            Stream = _tcpClient.GetStream();
-            var buffer = new byte[1024];
-            var commandInterpreter = new CommandInterpreter();
-            var connectValidation = true;
-            while (true)
+            try
             {
-                if (connectValidation)
+                Stream = _tcpClient.GetStream();
+                var buffer = new byte[1024];
+                var commandInterpreter = new CommandInterpreter();
+                var connectValidation = true;
+                while (true)
                 {
-                    Common.GameBoardController.ConnectionEstablished();
-                    connectValidation = false;
-                }
+                    if (connectValidation)
+                    {
+                        Common.GameBoardController.ConnectionEstablished();
+                        connectValidation = false;
+                    }
 
-                var streamReader = new StreamReader(Stream);
-                var receivedMessage = streamReader.ReadLine();
+                    var streamReader = new StreamReader(Stream);
+                    var receivedMessage = streamReader.ReadLine();
 
-                if (commandInterpreter.ExecuteCommand(receivedMessage))
-                {
-                    break;
+                    if (commandInterpreter.ExecuteCommand(receivedMessage))
+                    {
+                        break;
+                    }
                 }
+                Stream.Close();
+                _tcpClient.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"Connection Error: " + exception.Message);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
@@ -15,9 +16,8 @@ namespace PlanesGame.Network.NetworkCore
 
         public override void StartService()
         {
-            _tcpListener = TcpListener.Create(Common.IpEndPoint.Port);
-            var thread = new Thread(ServerService);
-            thread.IsBackground = true;
+            _tcpListener = new TcpListener(IPAddress.Any,Common.IpEndPoint.Port);
+            var thread = new Thread(ServerService) {IsBackground = true};
             thread.Start();
         }
 
@@ -25,30 +25,37 @@ namespace PlanesGame.Network.NetworkCore
         {
             _tcpListener.Start();
             _tcpClient = _tcpListener.AcceptTcpClient();
-
-            Stream = _tcpClient.GetStream();
-            var buffer = new byte[1024];
-            var commandInterpreter = new CommandInterpreter();
-            var connectValidation = true;
-            while (true)
+            try
             {
-                if (connectValidation)
+                Stream = _tcpClient.GetStream();
+                var buffer = new byte[1024];
+                var commandInterpreter = new CommandInterpreter();
+                var connectValidation = true;
+                while (true)
                 {
-                    Common.GameBoardController.ConnectionEstablished();
-                    connectValidation = false;
+                    if (connectValidation)
+                    {
+                        Common.GameBoardController.ConnectionEstablished();
+                        connectValidation = false;
+                    }
+
+
+                    var streamReader = new StreamReader(Stream);
+                    var receivedMessage = streamReader.ReadLine();
+
+                    if (commandInterpreter.ExecuteCommand(receivedMessage))
+                    {
+                        break;
+                    }
                 }
-
-
-                var streamReader = new StreamReader(Stream);
-                var receivedMessage = streamReader.ReadLine();
-
-                if (commandInterpreter.ExecuteCommand(receivedMessage))
-                {
-                    break;
-                }
+                Stream.Close();
+                _tcpListener.Stop();
             }
-            Stream.Close();
-            _tcpListener.Stop();
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"Connection Error: " + exception.Message);
+            }
+
         }
 
         public override ConnType ConnectionType { get { return ConnType.Server; } }

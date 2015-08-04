@@ -37,6 +37,10 @@ namespace PlanesGame.Views
             }
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            _controller.Redraw();
+        }
 
         private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -171,7 +175,7 @@ namespace PlanesGame.Views
 
         public void SetGameStatus(string data)
         {
-            throw new NotImplementedException();
+            GameStatusLabel.Text = data;
         }
 
         public void SetPlaneOrientationVisibile(bool flag)
@@ -179,13 +183,31 @@ namespace PlanesGame.Views
             PlaneOrietationBar.BeginInvoke((Action) (() =>
             {
                 PlaneOrietationBar.Visible = flag;
-                PlaneOrietationBar.BringToFront();
+                if (flag)
+                {
+                    PlaneOrietationBar.BringToFront();
+                }
+                else
+                {
+                    PlaneOrietationBar.SendToBack();
+                }
             }));
         }
 
         public void SetScoreBoardVisibile(bool flag)
         {
-            throw new NotImplementedException();
+            ScoreBar.BeginInvoke((Action)(() =>
+            {
+                ScoreBar.Visible = flag;
+                if (flag)
+                {
+                    ScoreBar.BringToFront();
+                }
+                else
+                {
+                    ScoreBar.SendToBack();
+                }
+            }));
         }
 
         public void AddMessage(string data)

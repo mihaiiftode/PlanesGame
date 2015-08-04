@@ -36,7 +36,7 @@ namespace PlanesGame.GameGraphics
                 Y = tileSize.Height + 2
             };
 
-            GraphicsBuffer.Graphics.FillRectangle(Brushes.WhiteSmoke, _clientRectangle);
+            GraphicsBuffer.Graphics.FillRectangle(Brushes.BurlyWood, _clientRectangle);
 
             for (var i = 0; i < TilesNumberOfRows; i++)
             {

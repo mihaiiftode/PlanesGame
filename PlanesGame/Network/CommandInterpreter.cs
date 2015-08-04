@@ -21,6 +21,7 @@ namespace PlanesGame.Network
                     Common.GameBoardController.StartGame();
                     return false;
                 case DataType.RestartGame:
+                    Common.GameBoardController.StartNewGame();
                     return false;
                 case DataType.Attack:
                     Common.GameBoardController.Attacked(data);
@@ -31,9 +32,8 @@ namespace PlanesGame.Network
                 case DataType.SetUp:
                     Common.GameBoardController.SetUpData(data);
                     return false;
-                case DataType.Won:
-                    return false;
                 case DataType.Lost:
+                    Common.GameBoardController.GameLost();
                     return false;
                 case DataType.Message:
                     Common.GameBoardController.AddMessage(data);

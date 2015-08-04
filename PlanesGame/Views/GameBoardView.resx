@@ -339,6 +339,24 @@
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <data name="ConnectionStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 17</value>
+  </data>
+  <data name="ConnectionStatusLabel.Text" xml:space="preserve">
+    <value>Connection: Disconnected!</value>
+  </data>
+  <data name="OponentNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="OponentNameLabel.Text" xml:space="preserve">
+    <value>Oponent:</value>
+  </data>
+  <data name="GameStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 17</value>
+  </data>
+  <data name="GameStatusLabel.Text" xml:space="preserve">
+    <value>Game not running!</value>
+  </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 436</value>
   </data>
@@ -362,24 +380,6 @@
   </data>
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="ConnectionStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 17</value>
-  </data>
-  <data name="ConnectionStatusLabel.Text" xml:space="preserve">
-    <value>Connections Status</value>
-  </data>
-  <data name="OponentNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
-  </data>
-  <data name="OponentNameLabel.Text" xml:space="preserve">
-    <value>Adversary Name</value>
-  </data>
-  <data name="GameStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 17</value>
-  </data>
-  <data name="GameStatusLabel.Text" xml:space="preserve">
-    <value>Game Status(global identifier)</value>
   </data>
   <data name="&gt;&gt;OponentsMisses.Name" xml:space="preserve">
     <value>OponentsMisses</value>
@@ -880,7 +880,7 @@
     <value>12</value>
   </data>
   <data name="PlaneOrietationBar.Text" xml:space="preserve">
-    <value>Plane Orientation</value>
+    <value>Plane Head Orientation</value>
   </data>
   <data name="PlaneOrietationBar.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
