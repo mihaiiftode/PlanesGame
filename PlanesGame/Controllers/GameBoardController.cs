@@ -178,6 +178,7 @@ namespace PlanesGame.Controllers
         {
             if (CheckPlaneDuplicates(matrixCoordinate, plane)) return;
             _firstPlayer.PlanesAlive++;
+            _firstPlayer.PlanesList.Add(plane);
             var row = 0;
             for (var i = matrixCoordinate.Row; i < matrixCoordinate.Row + plane.NumberOfRows; i++, row++)
             {
@@ -279,8 +280,13 @@ namespace PlanesGame.Controllers
                 foreach (var point in points)
                 {
                     if (point != "")
-                        _planeTemplate.KillPoints.Add(new MatrixCoordinate(int.Parse(point[0].ToString()),
-                            int.Parse(point[1].ToString())));
+                    {
+                        var matrixCoordinate = new MatrixCoordinate(int.Parse(point[0].ToString()),
+                            int.Parse(point[1].ToString()));
+                        _planeTemplate.KillPoints.Add(matrixCoordinate);
+                        _planeTemplate.PlaneMatrix[matrixCoordinate.Row, matrixCoordinate.Column] = 2;
+                    }
+                    
                 }
             }
             if (data.Contains("name: "))
