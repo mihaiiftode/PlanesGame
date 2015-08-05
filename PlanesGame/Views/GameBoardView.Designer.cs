@@ -46,7 +46,6 @@ namespace PlanesGame.Views
             this.networkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aIModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setKillRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setPlayerNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MessageBoxInput = new System.Windows.Forms.TextBox();
             this.MessageSendButton = new System.Windows.Forms.Button();
             this.MessageBoxOutput = new System.Windows.Forms.TextBox();
@@ -54,17 +53,6 @@ namespace PlanesGame.Views
             this.ConnectionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.OponentNameLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.GameStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ScoreBar = new System.Windows.Forms.GroupBox();
-            this.OponentsMisses = new System.Windows.Forms.Label();
-            this.OponentsHits = new System.Windows.Forms.Label();
-            this.OponentsPlanesDestroyed = new System.Windows.Forms.Label();
-            this.OponentPlanesAlive = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.MissesLabel = new System.Windows.Forms.Label();
-            this.HitsLabel = new System.Windows.Forms.Label();
-            this.PlanesDestroyedLabel = new System.Windows.Forms.Label();
-            this.PlanesAliveLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.PlaneOrietationBar = new System.Windows.Forms.GroupBox();
             this.OrientationLeft = new System.Windows.Forms.RadioButton();
             this.OrientationRight = new System.Windows.Forms.RadioButton();
@@ -74,7 +62,6 @@ namespace PlanesGame.Views
             ((System.ComponentModel.ISupportInitialize)(this.OponentPanel)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.ScoreBar.SuspendLayout();
             this.PlaneOrietationBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -154,8 +141,7 @@ namespace PlanesGame.Views
             this.playersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.networkModeToolStripMenuItem,
             this.aIModeToolStripMenuItem,
-            this.setKillRulesToolStripMenuItem,
-            this.setPlayerNameToolStripMenuItem});
+            this.setKillRulesToolStripMenuItem});
             this.playersToolStripMenuItem.Name = "playersToolStripMenuItem";
             resources.ApplyResources(this.playersToolStripMenuItem, "playersToolStripMenuItem");
             // 
@@ -178,12 +164,6 @@ namespace PlanesGame.Views
             this.setKillRulesToolStripMenuItem.Name = "setKillRulesToolStripMenuItem";
             resources.ApplyResources(this.setKillRulesToolStripMenuItem, "setKillRulesToolStripMenuItem");
             this.setKillRulesToolStripMenuItem.Click += new System.EventHandler(this.setKillRulesToolStripMenuItem_Click);
-            // 
-            // setPlayerNameToolStripMenuItem
-            // 
-            this.setPlayerNameToolStripMenuItem.Name = "setPlayerNameToolStripMenuItem";
-            resources.ApplyResources(this.setPlayerNameToolStripMenuItem, "setPlayerNameToolStripMenuItem");
-            this.setPlayerNameToolStripMenuItem.Click += new System.EventHandler(this.setPlayerNameToolStripMenuItem_Click);
             // 
             // MessageBoxInput
             // 
@@ -227,72 +207,6 @@ namespace PlanesGame.Views
             this.GameStatusLabel.Name = "GameStatusLabel";
             resources.ApplyResources(this.GameStatusLabel, "GameStatusLabel");
             // 
-            // ScoreBar
-            // 
-            this.ScoreBar.Controls.Add(this.OponentsMisses);
-            this.ScoreBar.Controls.Add(this.OponentsHits);
-            this.ScoreBar.Controls.Add(this.OponentsPlanesDestroyed);
-            this.ScoreBar.Controls.Add(this.OponentPlanesAlive);
-            this.ScoreBar.Controls.Add(this.label12);
-            this.ScoreBar.Controls.Add(this.MissesLabel);
-            this.ScoreBar.Controls.Add(this.HitsLabel);
-            this.ScoreBar.Controls.Add(this.PlanesDestroyedLabel);
-            this.ScoreBar.Controls.Add(this.PlanesAliveLabel);
-            this.ScoreBar.Controls.Add(this.label1);
-            resources.ApplyResources(this.ScoreBar, "ScoreBar");
-            this.ScoreBar.Name = "ScoreBar";
-            this.ScoreBar.TabStop = false;
-            // 
-            // OponentsMisses
-            // 
-            resources.ApplyResources(this.OponentsMisses, "OponentsMisses");
-            this.OponentsMisses.Name = "OponentsMisses";
-            // 
-            // OponentsHits
-            // 
-            resources.ApplyResources(this.OponentsHits, "OponentsHits");
-            this.OponentsHits.Name = "OponentsHits";
-            // 
-            // OponentsPlanesDestroyed
-            // 
-            resources.ApplyResources(this.OponentsPlanesDestroyed, "OponentsPlanesDestroyed");
-            this.OponentsPlanesDestroyed.Name = "OponentsPlanesDestroyed";
-            // 
-            // OponentPlanesAlive
-            // 
-            resources.ApplyResources(this.OponentPlanesAlive, "OponentPlanesAlive");
-            this.OponentPlanesAlive.Name = "OponentPlanesAlive";
-            // 
-            // label12
-            // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
-            // 
-            // MissesLabel
-            // 
-            resources.ApplyResources(this.MissesLabel, "MissesLabel");
-            this.MissesLabel.Name = "MissesLabel";
-            // 
-            // HitsLabel
-            // 
-            resources.ApplyResources(this.HitsLabel, "HitsLabel");
-            this.HitsLabel.Name = "HitsLabel";
-            // 
-            // PlanesDestroyedLabel
-            // 
-            resources.ApplyResources(this.PlanesDestroyedLabel, "PlanesDestroyedLabel");
-            this.PlanesDestroyedLabel.Name = "PlanesDestroyedLabel";
-            // 
-            // PlanesAliveLabel
-            // 
-            resources.ApplyResources(this.PlanesAliveLabel, "PlanesAliveLabel");
-            this.PlanesAliveLabel.Name = "PlanesAliveLabel";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
             // PlaneOrietationBar
             // 
             this.PlaneOrietationBar.Controls.Add(this.OrientationLeft);
@@ -307,26 +221,24 @@ namespace PlanesGame.Views
             // 
             resources.ApplyResources(this.OrientationLeft, "OrientationLeft");
             this.OrientationLeft.Name = "OrientationLeft";
-            this.OrientationLeft.TabStop = true;
             this.OrientationLeft.UseVisualStyleBackColor = true;
             // 
             // OrientationRight
             // 
             resources.ApplyResources(this.OrientationRight, "OrientationRight");
             this.OrientationRight.Name = "OrientationRight";
-            this.OrientationRight.TabStop = true;
             this.OrientationRight.UseVisualStyleBackColor = true;
             // 
             // OrientationDown
             // 
             resources.ApplyResources(this.OrientationDown, "OrientationDown");
             this.OrientationDown.Name = "OrientationDown";
-            this.OrientationDown.TabStop = true;
             this.OrientationDown.UseVisualStyleBackColor = true;
             // 
             // OrientationUp
             // 
             resources.ApplyResources(this.OrientationUp, "OrientationUp");
+            this.OrientationUp.Checked = true;
             this.OrientationUp.Name = "OrientationUp";
             this.OrientationUp.TabStop = true;
             this.OrientationUp.UseVisualStyleBackColor = true;
@@ -343,7 +255,6 @@ namespace PlanesGame.Views
             this.Controls.Add(this.OponentPanel);
             this.Controls.Add(this.PlayerPanel);
             this.Controls.Add(this.PlaneOrietationBar);
-            this.Controls.Add(this.ScoreBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -355,8 +266,6 @@ namespace PlanesGame.Views
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.ScoreBar.ResumeLayout(false);
-            this.ScoreBar.PerformLayout();
             this.PlaneOrietationBar.ResumeLayout(false);
             this.PlaneOrietationBar.PerformLayout();
             this.ResumeLayout(false);
@@ -386,24 +295,12 @@ namespace PlanesGame.Views
         private ToolStripStatusLabel ConnectionStatusLabel;
         private ToolStripStatusLabel OponentNameLabel;
         private ToolStripStatusLabel GameStatusLabel;
-        private GroupBox ScoreBar;
         private ToolStripMenuItem disconnectToolStripMenuItem;
-        private Label OponentsMisses;
-        private Label OponentsHits;
-        private Label OponentsPlanesDestroyed;
-        private Label OponentPlanesAlive;
-        private Label label12;
-        private Label MissesLabel;
-        private Label HitsLabel;
-        private Label PlanesDestroyedLabel;
-        private Label PlanesAliveLabel;
-        private Label label1;
         private GroupBox PlaneOrietationBar;
         private RadioButton OrientationLeft;
         private RadioButton OrientationRight;
         private RadioButton OrientationDown;
         private RadioButton OrientationUp;
-        private ToolStripMenuItem setPlayerNameToolStripMenuItem;
     }
 }
 

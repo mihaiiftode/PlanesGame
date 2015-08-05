@@ -9,9 +9,12 @@ namespace PlanesGame.Network.Factory
         {
             switch (connectionType)
             {
-                case "server": return new Server();
-                case "client": return new Client();
-                default: throw new Exception("Invalid connection type:" + connectionType);
+                case "server":
+                    return new Server();
+                case "client":
+                    return new Client();
+                default:
+                    throw new Exception("Invalid connection type:" + connectionType);
             }
         }
     }

@@ -9,6 +9,7 @@ namespace PlanesGame.Views
     {
         private PlayerConnectionController _controller;
         private bool _showConnectionData;
+
         public PlayerConnectionView()
         {
             InitializeComponent();
@@ -24,15 +25,12 @@ namespace PlanesGame.Views
                 }
                 catch (Exception)
                 {
-                    if(_showConnectionData)
+                    if (_showConnectionData)
                         MessageBox.Show(@"Invalid Ip/Port format");
                     return null;
                 }
             }
-            set
-            {
-                IpTextBox.Text = value.ToString();
-            }
+            set { IpTextBox.Text = value.ToString(); }
         }
 
         public string PlayerName

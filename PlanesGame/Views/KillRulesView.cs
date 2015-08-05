@@ -7,13 +7,14 @@ namespace PlanesGame.Views
 {
     public partial class KillRulesView : Form, IKillRulesView
     {
-        private Timer _timer;
         private KillRulesController _controller;
+        private Timer _timer;
+
         public KillRulesView()
         {
             InitializeComponent();
         }
-        
+
         public void SetController(KillRulesController controller)
         {
             _controller = controller;

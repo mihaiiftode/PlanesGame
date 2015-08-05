@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using PlanesGame.Controllers;
 
 namespace PlanesGame.Views
 {
-    public partial class GameBoardView : Form , IGameBoardView
+    public partial class GameBoardView : Form, IGameBoardView
     {
         private GameBoardController _controller;
 
@@ -16,151 +15,21 @@ namespace PlanesGame.Views
             InitiateRadioButtons();
         }
 
-        private void InitiateRadioButtons()
-        {
-            foreach (var radioButton in PlaneOrietationBar.Controls.Cast<RadioButton>())
-            {
-                radioButton.Click += (sender, args) =>
-                {
-                    ResetAllRadioButtons(sender);
-                    _controller.SetPlaneOrientation(((RadioButton)sender).Text);
-                };
-            }
-        }
-
-        private void ResetAllRadioButtons(object sender)
-        {
-            ((RadioButton)sender).Checked = true;
-            foreach (var radioButton in PlaneOrietationBar.Controls.Cast<RadioButton>().Where(radioButton => !radioButton.Equals(sender)))
-            {
-                radioButton.Checked = false;
-            }
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            _controller.Redraw();
-        }
-
-        private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CallEngineStart();
-            _controller.StartNewGame();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void hostAGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CallEngineStart();
-           _controller.StartServer();
-        }
-
-        private void connectToGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CallEngineStart();
-            _controller.ConnectToGame();
-        }
-
-        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _controller.Disconnect();
-        }
-
-        private void networkModeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _controller.SetOponent("network");
-        }
-
-        private void aIModeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            _controller.SetOponent("computer");
-        }
-
-        private void setKillRulesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _controller.SetKillRules();
-        }
-
-        private void setPlayerNameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _controller.SetPlayerRelatedData();
-        }
-
-        private void PlayerPanel_MouseClick(object sender, MouseEventArgs e)
-        {
-            _controller.SetUp(e.Location);
-        }
-
-        private void OponentPanel_MouseClick(object sender, MouseEventArgs e)
-        {
-            _controller.ExecuteAttack(e.Location);
-        }
-        
-        private void CallEngineStart()
-        {
-            _controller.SetEnginePlayer(PlayerPanel.CreateGraphics(), PlayerPanel.ClientRectangle);
-            _controller.SetEngineOponent(OponentPanel.CreateGraphics(), OponentPanel.ClientRectangle);
-        }
-
         public string MessageBoxInputText
         {
             get { return MessageBoxInput.Text; }
             set { MessageBoxInput.Text = value; }
         }
 
-        public string MessageBoxOutputText    
+        public string MessageBoxOutputText
         {
             get { return MessageBoxOutput.Text; }
             set { MessageBoxOutput.Text = value; }
         }
+
         public void SetController(GameBoardController controller)
         {
             _controller = controller;
-        }
-
-        public void SetPlayerPlanesAlive(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetPlayerPlanesDestroyed(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetPlayerHits(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetPlayerMisses(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetOponentPlanesAlive(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetOponentPlanesDestroyed(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetOponentHits(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetOponentMisses(string data)
-        {
-            throw new NotImplementedException();
         }
 
         public void SetConnectionStatus(string data)
@@ -194,28 +63,96 @@ namespace PlanesGame.Views
             }));
         }
 
-        public void SetScoreBoardVisibile(bool flag)
-        {
-            ScoreBar.BeginInvoke((Action)(() =>
-            {
-                ScoreBar.Visible = flag;
-                if (flag)
-                {
-                    ScoreBar.BringToFront();
-                }
-                else
-                {
-                    ScoreBar.SendToBack();
-                }
-            }));
-        }
-
         public void AddMessage(string data)
         {
-            MessageBoxOutput.BeginInvoke((Action)(() =>
+            MessageBoxOutput.BeginInvoke((Action) (() => { MessageBoxOutput.AppendText(data); }));
+        }
+
+        private void InitiateRadioButtons()
+        {
+            foreach (var radioButton in PlaneOrietationBar.Controls.Cast<RadioButton>())
             {
-                MessageBoxOutput.AppendText(data);
-            }));
+                radioButton.Click += (sender, args) =>
+                {
+                    ResetAllRadioButtons(sender);
+                    _controller.SetPlaneOrientation(((RadioButton) sender).Text);
+                };
+            }
+        }
+
+        private void ResetAllRadioButtons(object sender)
+        {
+            ((RadioButton) sender).Checked = true;
+            foreach (
+                var radioButton in
+                    PlaneOrietationBar.Controls.Cast<RadioButton>().Where(radioButton => !radioButton.Equals(sender)))
+            {
+                radioButton.Checked = false;
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            _controller.Redraw();
+        }
+
+        private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CallEngineStart();
+            _controller.StartNewGame();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void hostAGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CallEngineStart();
+            _controller.StartServer();
+        }
+
+        private void connectToGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CallEngineStart();
+            _controller.ConnectToGame();
+        }
+
+        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.Disconnect();
+        }
+
+        private void networkModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.SetOponent("network");
+        }
+
+        private void aIModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.SetOponent("computer");
+        }
+
+        private void setKillRulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.SetKillRules();
+        }
+
+        private void PlayerPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            _controller.SetUp(e.Location);
+        }
+
+        private void OponentPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            _controller.ExecuteAttack(e.Location);
+        }
+
+        private void CallEngineStart()
+        {
+            _controller.SetEnginePlayer(PlayerPanel.CreateGraphics(), PlayerPanel.ClientRectangle);
+            _controller.SetEngineOponent(OponentPanel.CreateGraphics(), OponentPanel.ClientRectangle);
         }
 
         private void MessageSendButton_Click(object sender, EventArgs e)
@@ -234,6 +171,7 @@ namespace PlanesGame.Views
         private void GameBoardView_FormClosing(object sender, FormClosingEventArgs e)
         {
             _controller.Disconnect();
+            e.Cancel = false;
         }
     }
 }

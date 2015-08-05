@@ -8,18 +8,37 @@ namespace PlanesGame.Network.NetworkCore
 {
     public class Client : Network
     {
-        public new Socket Socket { get; set; }
+        private bool _isConnected;
+        private TcpClient _tcpClient;
         public new NetworkStream Stream { get; set; }
 
-        private TcpClient _tcpClient;
+        public override ConnectionType ConnectionType
+        {
+            get { return ConnectionType.Client; }
+        }
 
         public override void StartService()
         {
-            _tcpClient = new TcpClient(Common.IpEndPoint.Address.ToString(), Common.IpEndPoint.Port);
-            var thread = new Thread(ClientService);
+            try
+            {
+                _tcpClient = new TcpClient(Common.IpEndPoint.Address.ToString(), Common.IpEndPoint.Port);
+                var thread = new Thread(ClientService) {IsBackground = true};
+                thread.Start();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@"Something went Wrong: " + exception.Message);
+            }
+        }
 
-            thread.IsBackground = true;
-            thread.Start();
+        public override void StopService()
+        {
+            _tcpClient.Close();
+        }
+
+        public override bool IsConnected()
+        {
+            return _isConnected;
         }
 
         private void ClientService()
@@ -27,7 +46,6 @@ namespace PlanesGame.Network.NetworkCore
             try
             {
                 Stream = _tcpClient.GetStream();
-                var buffer = new byte[1024];
                 var commandInterpreter = new CommandInterpreter();
                 var connectValidation = true;
                 while (true)
@@ -36,6 +54,7 @@ namespace PlanesGame.Network.NetworkCore
                     {
                         Common.GameBoardController.ConnectionEstablished();
                         connectValidation = false;
+                        _isConnected = true;
                     }
 
                     var streamReader = new StreamReader(Stream);
@@ -43,6 +62,8 @@ namespace PlanesGame.Network.NetworkCore
 
                     if (commandInterpreter.ExecuteCommand(receivedMessage))
                     {
+                        _isConnected = false;
+                        MessageBox.Show(@"Oponent bailed!");
                         break;
                     }
                 }
@@ -55,21 +76,18 @@ namespace PlanesGame.Network.NetworkCore
             }
         }
 
-        public override ConnType ConnectionType { get { return ConnType.Client; } }
-
         public override void SendData(DataType dataType, string data = "")
         {
             try
             {
                 var streamWriter = new StreamWriter(Stream);
-                streamWriter.WriteLine((int)dataType + " " + data);
+                streamWriter.WriteLine((int) dataType + " " + data);
                 streamWriter.Flush();
             }
             catch (Exception e)
             {
                 MessageBox.Show(@"Something went wrong:" + e.Message);
             }
-
         }
     }
 }

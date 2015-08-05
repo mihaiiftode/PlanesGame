@@ -1,18 +1,9 @@
 ﻿using System.Collections.Generic;
-using PlanesGame.GameGraphics;
 
 namespace PlanesGame.Models.Plane
 {
     public class Plane : IPlane
     {
-        public int[,] PlaneMatrix { get; set; }
-        public int NumberOfRows { get; set; }
-        public int NumberOfColumns { get; set; }
-        public MatrixCoordinate PlaneStartPosition { get; set; }
-        public List<MatrixCoordinate> KillPoints { get; set; }
-
-        public string Orientation { get; set; }
-
         public Plane()
         {
             Orientation = "up";
@@ -24,8 +15,15 @@ namespace PlanesGame.Models.Plane
                 {0, 1, 0},
                 {1, 1, 1},
                 {0, 1, 0},
-                {1, 1, 1},
+                {1, 1, 1}
             };
         }
+
+        public string Orientation { get; set; }
+        public int[,] PlaneMatrix { get; set; }
+        public int NumberOfRows { get; set; }
+        public int NumberOfColumns { get; set; }
+        public MatrixCoordinate PlaneStartPosition { get; set; }
+        public List<MatrixCoordinate> KillPoints { get; set; }
     }
 }

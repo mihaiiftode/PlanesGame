@@ -2,18 +2,19 @@
 
 namespace PlanesGame.Network.NetworkCore
 {
-    public enum ConnType { Server, Client };
+    public enum ConnectionType
+    {
+        Server,
+        Client
+    };
 
     public abstract class Network
     {
-        public Socket Socket { get; set; }
-
         public NetworkStream Stream { get; set; }
-
-        public abstract ConnType ConnectionType { get; }
-
+        public abstract ConnectionType ConnectionType { get; }
         public abstract void SendData(DataType dataType, string data = "");
-
         public abstract void StartService();
+        public abstract void StopService();
+        public abstract bool IsConnected();
     }
 }

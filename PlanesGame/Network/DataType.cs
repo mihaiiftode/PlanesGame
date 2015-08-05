@@ -10,6 +10,6 @@
         AttackResponse,
         SetUp,
         Message,
-        Lost,
-     }
+        Won
+    }
 }

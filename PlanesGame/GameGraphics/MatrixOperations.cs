@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PlanesGame.GameCore
+﻿namespace PlanesGame.GameGraphics
 {
     public class MatrixOperations
     {
@@ -11,7 +9,7 @@ namespace PlanesGame.GameCore
             {
                 for (var c = 0; c < collumns; c++)
                 {
-                    destination[c,rows - r - 1] = matrix[r,c];
+                    destination[c, rows - r - 1] = matrix[r, c];
                 }
             }
             return destination;
@@ -56,7 +54,7 @@ namespace PlanesGame.GameCore
                 {
                     for (var c = 0; c < collumns - 1; c++)
                     {
-                        destination[c, r] = matrix[r ,c + 1];
+                        destination[c, r] = matrix[r, c + 1];
                     }
                 }
 
@@ -67,6 +65,6 @@ namespace PlanesGame.GameCore
 
                 return destination;
             }
-        } 
+        }
     }
 }

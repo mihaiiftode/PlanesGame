@@ -1,6 +1,6 @@
 ﻿using PlanesGame.Models.Player;
 
-namespace PlanesGame.Models.PlayerFactory
+namespace PlanesGame.GameCore.PlayerFactory
 {
     public abstract class PlayerFactory
     {

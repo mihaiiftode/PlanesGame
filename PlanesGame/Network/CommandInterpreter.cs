@@ -6,9 +6,8 @@ namespace PlanesGame.Network
     {
         public bool ExecuteCommand(string message)
         {
-            Common.GameBoardController.AddMessage(message);
             if (message == null) return false;
-            var dataType = (DataType)int.Parse(message[0].ToString());
+            var dataType = (DataType) int.Parse(message[0].ToString());
             var data = message.Substring(1);
             switch (dataType)
             {
@@ -21,7 +20,7 @@ namespace PlanesGame.Network
                     Common.GameBoardController.StartGame();
                     return false;
                 case DataType.RestartGame:
-                    Common.GameBoardController.StartNewGame();
+                    Common.GameBoardController.RestartGame();
                     return false;
                 case DataType.Attack:
                     Common.GameBoardController.Attacked(data);
@@ -32,8 +31,8 @@ namespace PlanesGame.Network
                 case DataType.SetUp:
                     Common.GameBoardController.SetUpData(data);
                     return false;
-                case DataType.Lost:
-                    Common.GameBoardController.GameLost();
+                case DataType.Won:
+                    Common.GameBoardController.GameWon();
                     return false;
                 case DataType.Message:
                     Common.GameBoardController.AddMessage(data);

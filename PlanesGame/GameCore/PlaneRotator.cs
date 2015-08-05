@@ -1,15 +1,15 @@
-﻿using PlanesGame.GameCore;
-using PlanesGame.GameGraphics;
+﻿using PlanesGame.GameGraphics;
+using PlanesGame.Models;
+using PlanesGame.Models.Plane;
 
-namespace PlanesGame.Models.Plane
+namespace PlanesGame.GameCore
 {
     public class PlaneRotator
     {
-
         public void SetPlaneDown(Plane plane)
         {
             plane.Orientation = "down";
-            
+
             for (var i = 0; i < 2; i++)
             {
                 RotatePlaneMatrix(plane);

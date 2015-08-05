@@ -7,14 +7,14 @@ namespace PlanesGame.Controllers
     {
         private readonly IPlayerConnectionView _view;
 
-        public PlayerConnectionInfo PlayerConnectionInfo { get; set; }
-
         public PlayerConnectionController(IPlayerConnectionView view, bool showConnectionInfo)
         {
             _view = view;
             _view.SetConnectionDataView(showConnectionInfo);
             _view.SetController(this);
         }
+
+        public PlayerConnectionInfo PlayerConnectionInfo { get; set; }
 
         public void SetUpConnection()
         {

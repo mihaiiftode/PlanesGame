@@ -1,20 +1,11 @@
 ﻿using System.Drawing;
+using PlanesGame.Models;
 
 namespace PlanesGame.GameGraphics
 {
     public class Engine : IEngine
     {
-        public BufferedGraphicsContext GraphicsContext { get; set; }
-
-        public BufferedGraphics GraphicsBuffer { get; set; }
-
-        public Tile[,] Tiles { get; set; }
-
-        public int TilesNumberOfRows { get; set; }
-
-        public int TilesNumberOfCollumns { get; set; }
-
-        private Rectangle _clientRectangle ;
+        private Rectangle _clientRectangle;
 
         public Engine(Graphics targetGraphics, Rectangle clientRectangle)
         {
@@ -27,9 +18,16 @@ namespace PlanesGame.GameGraphics
             IntializeTiles();
         }
 
+        public BufferedGraphicsContext GraphicsContext { get; set; }
+        public BufferedGraphics GraphicsBuffer { get; set; }
+        public Tile[,] Tiles { get; set; }
+        public int TilesNumberOfRows { get; set; }
+        public int TilesNumberOfCollumns { get; set; }
+
         public void Draw()
         {
-            var tileSize = new Size(_clientRectangle.Width/TilesNumberOfCollumns - 2, _clientRectangle.Height/TilesNumberOfRows - 2);
+            var tileSize = new Size(_clientRectangle.Width/TilesNumberOfCollumns - 2,
+                _clientRectangle.Height/TilesNumberOfRows - 2);
             var offsetBetweenTiles = new
             {
                 X = tileSize.Width + 2,
@@ -44,7 +42,7 @@ namespace PlanesGame.GameGraphics
                 {
                     Tiles[i, j].Rectangle = new Rectangle(new Point(j*offsetBetweenTiles.X, i*offsetBetweenTiles.Y),
                         tileSize);
-                    GraphicsBuffer.Graphics.FillRectangle(Tiles[i, j].Brush, Tiles[i,j].Rectangle);
+                    GraphicsBuffer.Graphics.FillRectangle(Tiles[i, j].Brush, Tiles[i, j].Rectangle);
                 }
             }
             GraphicsBuffer.Render();
@@ -52,7 +50,7 @@ namespace PlanesGame.GameGraphics
 
         public void SetTileMatrixSize(int rows, int collumns)
         {
-            Tiles = new Tile[rows,collumns];
+            Tiles = new Tile[rows, collumns];
             TilesNumberOfRows = rows;
             TilesNumberOfCollumns = collumns;
             IntializeTiles();
@@ -60,10 +58,15 @@ namespace PlanesGame.GameGraphics
 
         public void UpdateTile(int x, int y, Color myColor)
         {
-            ((SolidBrush)Tiles[x, y].Brush).Color = myColor;
+            ((SolidBrush) Tiles[x, y].Brush).Color = myColor;
             Draw();
         }
-        
+
+        public void ResetTiles()
+        {
+            IntializeTiles();
+        }
+
         public MatrixCoordinate GetTilePosition(Point location)
         {
             for (var i = 0; i < TilesNumberOfRows; i++)
@@ -76,7 +79,7 @@ namespace PlanesGame.GameGraphics
                     }
                 }
             }
-            return new MatrixCoordinate(-1,-1);
+            return new MatrixCoordinate(-1, -1);
         }
 
         private void IntializeTiles()
@@ -85,13 +88,13 @@ namespace PlanesGame.GameGraphics
             {
                 for (var j = 0; j < TilesNumberOfCollumns; j++)
                 {
-                    Tiles[i, j] = new Tile()
+                    Tiles[i, j] = new Tile
                     {
                         Rectangle = new Rectangle(),
                         Brush = new SolidBrush(Color.Black)
                     };
                 }
             }
-        } 
+        }
     }
 }
