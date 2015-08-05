@@ -179,6 +179,7 @@ namespace PlanesGame.Controllers
 
         public void SetKillRules()
         {
+            if (_network == null) return;
             if (_network.ConnectionType != ConnectionType.Server) return;
 
             var killRulesView = new KillRulesView();

@@ -12,7 +12,7 @@ namespace PlanesGame.GameCore.PlayerFactory
                 case "computer":
                     return new AiPlayer();
                 case "network":
-                    return new Models.Player.Player();
+                    return new Player();
                 default:
                     throw new ArgumentException("Wrong player type");
             }
